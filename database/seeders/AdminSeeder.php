@@ -14,16 +14,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'nom' => 'admin',
-            'prenom' => 'admin',
+            'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'role_id' => 1,
-            'date_naissance' => '1999-01-01',
-            'lieu_naissance' => 'Rabat',
-            'adresse' => 'Rabat',
-            'sexe' => 'homme',
-            'photo' => 'admin.jpg',
         ]);
     }
 }

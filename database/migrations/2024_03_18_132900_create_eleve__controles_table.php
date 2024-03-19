@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eleve__controles', function (Blueprint $table) {
+        Schema::create('etudiants__controles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('eleve_id');
-            $table->foreign('eleve_id')->references('id')->on('users');
+            $table->unsignedBigInteger('etudiant_id');
+            $table->foreign('etudiant_id')->references('id')->on('etudiants');
             $table->unsignedBigInteger('controle_id');
             $table->foreign('controle_id')->references('id')->on('controles');
             $table->float('note');

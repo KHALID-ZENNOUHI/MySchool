@@ -9,10 +9,10 @@ class Responsable extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'prenom', 'cin', 'adresse', 'telephone', 'sexe', 'user_id'];
+    protected $fillable = ['nom', 'prenom', 'cin', 'adresse', 'telephone', 'sexe', 'etudiant_id'];
 
-    public function user()
+    public function etudiant()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Etudiant::class);
     }
 }

@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Eleve_Controle extends Model
+class Etudiant_Controle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['eleve_id', 'controle_id', 'note'];
+    protected $fillable = ['etudiant_id', 'controle_id', 'note'];
 
-    public function eleve()
+    public function etudiant()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Etudiant::class);
     }
 
     public function controle()

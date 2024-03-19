@@ -19,4 +19,9 @@ class Controle extends Model
     {
         return $this->belongsTo(Classe::class);
     }
+
+    public function formateur()
+    {
+        return $this->belongsTo(Formateur::class);
+    }
 }

@@ -21202,7 +21202,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGOTQc41Ou0HEo="
 									},
-									"text": "1..*"
+									"text": "1"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -21746,7 +21746,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAGOTRbaE0OY9gc="
 									},
-									"text": "1..*"
+									"text": "1"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -22696,7 +22696,7 @@
 								"reference": {
 									"$ref": "AAAAAAGN54B6ehQbHOE="
 								},
-								"multiplicity": "1..*"
+								"multiplicity": "1"
 							}
 						}
 					],
@@ -22708,7 +22708,8 @@
 								"$ref": "AAAAAAGN54nyMiKEGV4="
 							},
 							"name": "nom_filiere",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						}
 					]
 				},
@@ -22898,7 +22899,7 @@
 								"reference": {
 									"$ref": "AAAAAAGN52NenrKzoKE="
 								},
-								"multiplicity": "1..*"
+								"multiplicity": "1"
 							}
 						}
 					],

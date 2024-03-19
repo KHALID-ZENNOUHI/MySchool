@@ -11,9 +11,9 @@ class Classe extends Model
 
     protected $fillable = ['nom', 'filiere_id'];
 
-    public function user()
+    public function etudiant()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Etudiant::class);
     }
 
     public function matiere()
