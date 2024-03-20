@@ -173,7 +173,7 @@
                         </div>
                         <a class="dropdown-item" href="">My Profile</a>
                         <a class="dropdown-item" href="inbox.html">Inbox</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                     </div>
                 </li>
             </ul>
