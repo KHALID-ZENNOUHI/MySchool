@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,16 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('user/profile', 'userProfile')->name('user.profile');
     Route::get('teacher/dashboard', 'teacherDashboardIndex')->name('teacher.dashboard');
     Route::get('student/dashboard', 'studentDashboardIndex')->name('student.dashboard');
+});
+
+// ------------------------ student -------------------------------//
+Route::controller(EtudiantController::class)->group(function () {
+    Route::get('students', 'index')->name('students.index'); 
+    Route::get('students/grid', 'studentGrid')->name('students.grid'); 
+    Route::get('students/create', 'create')->name('students.create'); 
+    Route::post('students', 'store')->name('student.store');
+    Route::get('students/{students}/edit', 'edit')->name('students.edit'); 
+    Route::post('students/{students}', 'update')->name('students.update'); 
+    Route::post('students/{students}', 'destroy')->name('students.delete'); 
+    Route::get('student/profile/{id}', 'studentProfile')->name('student.profile');
 });
