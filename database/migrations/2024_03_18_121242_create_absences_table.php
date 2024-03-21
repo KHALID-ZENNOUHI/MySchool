@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('etudiant_id');
-            $table->foreign('etudiant_id')->references('id')->on('etudiants');
+            $table->foreign('etudiant_id')->references('id')->on('etudiants')->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->timestamp('heure_debut');
             $table->timestamp('heure_fin');

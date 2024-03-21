@@ -41,8 +41,8 @@ Route::controller(EtudiantController::class)->group(function () {
     Route::get('students/grid', 'studentGrid')->name('students.grid'); 
     Route::get('students/create', 'create')->name('students.create'); 
     Route::post('students', 'store')->name('student.store');
-    Route::get('students/{students}/edit', 'edit')->name('students.edit'); 
-    Route::post('students/{students}', 'update')->name('students.update'); 
-    Route::post('students/{students}', 'destroy')->name('students.delete'); 
+    Route::get('students/{etudiant}/edit', 'edit')->name('students.edit'); 
+    Route::put('students/{etudiant}', 'update')->name('students.update'); 
+    Route::delete('students/{etudiant}', 'destroy')->name('students.destroy'); 
     Route::get('student/profile/{id}', 'studentProfile')->name('student.profile');
 });

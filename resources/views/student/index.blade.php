@@ -59,7 +59,7 @@
                                             <i class="fa fa-th" aria-hidden="true"></i>
                                         </a>
                                         <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                        <a href="{{ route('student.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                        <a href="{{ route('students.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -106,13 +106,13 @@
                                             <td>{{ $student->classe->nom }}</td>
                                             <td>{{ $student->responsable->nom }} {{ $student->responsable->prenom }}</td>
                                             <td>{{ $student->responsable->telephone }}</td>
-                                            <td>{{$student->addresse}}</td>
+                                            <td>{{$student->adresse}}</td>
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="{{ url('student/edit/'.$student->id) }}" class="btn btn-sm bg-danger-light">
+                                                    <a href="{{route('students.edit', $student->id)}}" class="btn btn-sm bg-danger-light">
                                                         <i class="far fa-edit me-2"></i>
                                                     </a>
-                                                    <a class="btn btn-sm bg-danger-light student_delete" data-bs-toggle="modal" data-bs-target="#studentUser">
+                                                    <a class="btn btn-sm bg-danger-light student_delete" data-bs-toggle="modal" data-bs-target="#studentUser{{$student->id}}">
                                                         <i class="far fa-trash-alt me-2"></i>
                                                     </a>
                                                 </div>
@@ -130,7 +130,8 @@
     </div>
 
     {{-- model student delete --}}
-    <div class="modal custom-modal fade" id="studentUser" role="dialog">
+    @foreach ($students as $student)
+    <div class="modal custom-modal fade" id="studentUser{{$student->id}}" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -139,11 +140,10 @@
                         <p>Are you sure want to delete?</p>
                     </div>
                     <div class="modal-btn delete-action">
-                        <form action="" method="POST">
+                        <form action="{{ route('students.destroy', $student->id) }}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <div class="row">
-                                <input type="hidden" name="id" class="e_id" value="">
-                                <input type="hidden" name="avatar" class="e_avatar" value="">
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-primary continue-btn submit-btn" style="border-radius: 5px !important;">Delete</button>
                                 </div>
@@ -157,6 +157,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     @section('script')
 
     {{-- delete js --}}

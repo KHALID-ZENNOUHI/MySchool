@@ -20,12 +20,14 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('date_naissance');
             $table->string('lieu_naissance');
-            $table->enum('sexe', ['Homme', 'Femme']);
+            $table->enum('sexe', ['homme', 'femme']);
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('classe_id');
             $table->foreign('classe_id')->references('id')->on('classes');
             $table->unsignedBigInteger('responsable_id');
             $table->foreign('responsable_id')->references('id')->on('responsables');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ use App\Models\Niveau;
 use App\Models\Responsable;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class EtudiantController extends Controller
 {
@@ -55,20 +56,25 @@ class EtudiantController extends Controller
             'sexe' => $request->sexe_responsable,
         ]);
 
+        // $image = uniqid() . '.' .$request->file('photo')->getClientOriginalExtension()->store('images');
+        
         $student = Etudiant::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email_student,
-            'telephone' => $request->telephone,
+            'photo' => $request->file('photo')->store('images'),
+            'telephone' => $request->has('telephone') ? $request->telephone : null,
             'adresse' => $request->adresse,
             'date_naissance' => $request->date_naissance,
             'lieu_naissance' => $request->lieu_naissance,
             'sexe' => $request->sexe,
-            'classe_id' => $request->classe_id,
+            'classe_id' => $request->has('classe_id') ? $request->classe_id : null,
             'responsable_id' => $responsable->id,
+            'user_id' => $user->id
         ]);
+        
 
-        return redirect()->route('student.index')->with('message', 'Etudiant ajouté avec succès');
+        return redirect()->route('students.index')->with('message', 'Etudiant ajouté avec succès');
     }
 
     /**
@@ -84,7 +90,10 @@ class EtudiantController extends Controller
      */
     public function edit(Etudiant $etudiant)
     {
-        //
+        $niveaux = Niveau::all();
+        $options = Filiere::all();
+        $classes = Classe::all();
+        return view('student.edit', compact('etudiant', 'niveaux', 'options', 'classes'));
     }
 
     /**
@@ -92,7 +101,41 @@ class EtudiantController extends Controller
      */
     public function update(UpdateEtudiantRequest $request, Etudiant $etudiant)
     {
-        //
+        $responsable = Responsable::findOrFail($etudiant->responsable_id);
+        $responsable->update([
+            'nom' => $request->nom_responsable,
+            'prenom' => $request->prenom_responsable,
+            'cin' => $request->cin,
+            'telephone' => $request->telephone_responsable,
+            'adresse' => $request->adresse_responsable,
+            'sexe' => $request->sexe_responsable,
+        ]);
+
+        if ($request->hasFile('photo')) {
+
+            if ($etudiant->photo && Storage::disk('public')->exists($etudiant->photo)) {
+                Storage::disk('public')->delete($etudiant->photo);
+            }
+    
+            $image = $request->file('photo')->store('images', 'public');
+            $etudiant->update([
+                'photo' => $image,
+            ]);
+        }
+
+        $etudiant->update([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email_student,
+            'telephone' => $request->has('telephone') ? $request->telephone : null,
+            'adresse' => $request->adresse,
+            'date_naissance' => $request->date_naissance,
+            'lieu_naissance' => $request->lieu_naissance,
+            'sexe' => $request->sexe,
+            'classe_id' => $request->has('classe_id') ? $request->classe_id : null,
+        ]);
+
+        return redirect()->route('students.index')->with('message', 'Etudiant modifié avec succès');
     }
 
     /**
@@ -100,6 +143,7 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
-        //
+        $etudiant->delete();
+        return redirect()->route('students.index')->with('message', 'Etudiant supprimé avec succès');
     }
 }

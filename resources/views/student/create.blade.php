@@ -53,7 +53,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Email <span class="login-danger">*</span></label>
-                                            <input type="email_student" class="form-control @error('email_student') is-invalid @enderror" name="email_student" placeholder="Enter Email_student" value="{{ old('email_student') }}">
+                                            <input type="email" class="form-control @error('email_student') is-invalid @enderror" name="email_student" placeholder="Enter Email_student" value="{{ old('email_student') }}">
                                             @error('email_student')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -108,12 +108,12 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Gender <span class="login-danger">*</span></label>
-                                            <select class="form-control select  @error('gender') is-invalid @enderror" name="gender">
+                                            <select class="form-control select  @error('sexe') is-invalid @enderror" name="sexe">
                                                 <option selected disabled>Select Gender</option>
-                                                <option value="Homme" {{ old('gender') == 'Homme' ? "selected" :"Homme"}}>Male</option>
-                                                <option value="Femme" {{ old('gender') == 'Femme' ? "selected" :"Femme"}}>Female</option>
+                                                <option value="homme" {{ old('sexe') == 'homme' ? "selected" :""}}>Male</option>
+                                                <option value="femme" {{ old('sexe') == 'femme' ? "selected" :""}}>Female</option>
                                             </select>
-                                            @error('gender')
+                                            @error('sexe')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -122,14 +122,14 @@
                                     </div>
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <input type="file" class="form-control" name="photo">
+                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
                                             @error('photo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Niveau <span class="login-danger">*</span></label>
@@ -152,7 +152,7 @@
                                             <select class="form-control select @error('filiere') is-invalid @enderror" name="filiere">
                                                 <option selected disabled>Please Select Option </option>
                                                 @foreach ($options as $option)
-                                                    <option value="{{ $option->id }}" {{ old('option') == $option->id ? "selected" :""}}>{{ $option->nom }}</option>
+                                                    <option value="{{ $option->id }}" {{ old('filiere') == $option->id ? "selected" :""}}>{{ $option->nom }}</option>
                                                 @endforeach
                                             </select>
                                             @error('filiere')
@@ -171,7 +171,7 @@
                                                     <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? "selected" :""}}>{{ $classe->nom }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('classe')
+                                            @error('classe_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -242,8 +242,8 @@
                                             <label>Gender <span class="login-danger">*</span></label>
                                             <select class="form-control select  @error('sexe_responsable') is-invalid @enderror" name="sexe_responsable">
                                                 <option selected disabled>Select Gender</option>
-                                                <option value="Homme" {{ old('sexe_responsable') == 'Homme' ? "selected" :""}}>Male</option>
-                                                <option value="Femme" {{ old('sexe_responsable') == 'Femme' ? "selected" :""}}>Female</option>
+                                                <option value="homme" {{ old('sexe_responsable') == 'homme' ? "selected" :""}}>Male</option>
+                                                <option value="femme" {{ old('sexe_responsable') == 'femme' ? "selected" :""}}>Female</option>
                                             </select>
                                             @error('sexe_responsable')
                                                 <span class="invalid-feedback" role="alert">

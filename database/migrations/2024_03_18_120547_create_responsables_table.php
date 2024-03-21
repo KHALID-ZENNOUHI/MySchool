@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('cin')->unique();
+            $table->string('cin');
             $table->string('adresse');
             $table->string('telephone');
             $table->enum('sexe', ['homme', 'femme']);

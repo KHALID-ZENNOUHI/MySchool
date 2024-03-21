@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('etudiants__controles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('etudiant_id');
-            $table->foreign('etudiant_id')->references('id')->on('etudiants');
+            $table->foreign('etudiant_id')->references('id')->on('etudiants')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('controle_id');
-            $table->foreign('controle_id')->references('id')->on('controles');
+            $table->foreign('controle_id')->references('id')->on('controles')->onDelete('cascade')->onUpdate('cascade');
             $table->float('note');
             $table->timestamps();
         });

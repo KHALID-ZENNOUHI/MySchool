@@ -21,8 +21,14 @@ class Etudiant extends Model
         'photo',
         'classe_id',
         'responsable_id',
+        'user_id'
     ];
 
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
+    
     public function responsable()
     {
         return $this->belongsTo(Responsable::class);

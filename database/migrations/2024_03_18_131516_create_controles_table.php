@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nom');
             $table->date('date');
             $table->unsignedBigInteger('matiere_id');
-            $table->foreign('matiere_id')->references('id')->on('matieres');
+            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('classe_id');
-            $table->foreign('classe_id')->references('id')->on('classes');
+            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

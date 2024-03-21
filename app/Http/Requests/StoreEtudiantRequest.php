@@ -25,22 +25,23 @@ class StoreEtudiantRequest extends FormRequest
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'email_student' => ['required', 'string', 'email', 'max:255', 'unique:etudiants,email'],
-            'telephone' => ['required', 'string', 'max:255', 'unique:etudiants,telephone'],
+            'telephone' => ['required','nullable', 'string', 'max:255', 'unique:etudiants,telephone'],
             'adresse' => ['required', 'string', 'max:255'],
-            'date_naissance' => ['required', 'string', 'max:255'],
+            'date_naissance' => ['required', 'date'], // Assuming date format is expected
             'lieu_naissance' => ['required', 'string', 'max:255'],
-            'sexe' => ['required', 'string', 'max:255'],
-            'photo' => ['nullable', 'image'],
+            'sexe' => ['required', 'string', 'in:homme,femme'], // Enum values: homme or femme
+            'photo' => ['required', 'image', 'mimes:jpeg,png,jpg,svg'],
             'classe_id' => ['required', 'exists:classes,id'],
             'nom_responsable' => ['required', 'string', 'max:255'],
             'prenom_responsable' => ['required', 'string', 'max:255'],
-            'cin' => ['required', 'string', 'max:255', 'unique:responsables'],
-            'telephone_responsable' => ['required', 'string', 'max:255', 'nullable', 'unique:responsables,telephone'],        
+            'cin' => ['required', 'string', 'max:255'],
+            'telephone_responsable' => ['required', 'string', 'max:255', 'nullable'],        
             'adresse_responsable' => ['required', 'string', 'max:255'],
-            'sexe_responsable' => ['required', 'string', 'max:255'],
+            'sexe_responsable' => ['required', 'string', 'in:homme,femme'], // Enum values: homme or femme
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ];
     }
+        
 }

@@ -27,12 +27,7 @@
         <div class="header">
             <div class="header-left">
                 <a href="" class="logo">
-                    {{-- {{ route('home') }} --}}
-                    <img src="{{ URL::to('assets/img/logo.png') }}" alt="Logo">
-                </a>
-                <a href="" class="logo logo-small">
-                    {{-- {{ route('home') }} --}}
-                    <img src="{{ URL::to('assets/img/logo-small.png') }}" alt="Logo" width="30" height="30">
+                    <img src="{{ URL::to('images/myschool.png') }}" alt="Logo">
                 </a>
             </div>
             <div class="menu-toggle">
