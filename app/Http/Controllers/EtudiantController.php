@@ -56,13 +56,12 @@ class EtudiantController extends Controller
             'sexe' => $request->sexe_responsable,
         ]);
 
-        // $image = uniqid() . '.' .$request->file('photo')->getClientOriginalExtension()->store('images');
         
         $student = Etudiant::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email_student,
-            'photo' => $request->file('photo')->store('images'),
+            'photo' => $request->file('photo')->store('images', 'public'),
             'telephone' => $request->has('telephone') ? $request->telephone : null,
             'adresse' => $request->adresse,
             'date_naissance' => $request->date_naissance,
@@ -145,5 +144,11 @@ class EtudiantController extends Controller
     {
         $etudiant->delete();
         return redirect()->route('students.index')->with('message', 'Etudiant supprimé avec succès');
+    }
+
+    public function studentGrid()
+    {
+        $students = Etudiant::all();
+        return view('student.grid', compact('students'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Formateur;
 use App\Http\Requests\StoreFormateurRequest;
 use App\Http\Requests\UpdateFormateurRequest;
+use App\Models\Classe;
 
 class FormateurController extends Controller
 {
@@ -13,7 +14,8 @@ class FormateurController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Formateur::all();
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -21,7 +23,8 @@ class FormateurController extends Controller
      */
     public function create()
     {
-        //
+        $classes = Classe::all();
+        return view('teacher.create', compact('classes'));
     }
 
     /**
@@ -29,7 +32,17 @@ class FormateurController extends Controller
      */
     public function store(StoreFormateurRequest $request)
     {
-        //
+        $formateur = Formateur::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'photo' => $request->file('photo')->store('formateurs', 'public'),
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'date_naissance' => $request->date_naissance,
+            'sexe' => $request->sexe,
+        ]);
+        return redirect()->route('teachers.index')->with('message', 'Formateur ajouté avec succès');
     }
 
     /**

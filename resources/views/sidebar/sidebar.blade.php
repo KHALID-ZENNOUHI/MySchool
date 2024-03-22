@@ -55,7 +55,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="" class="">Teacher List</a></li>
+                        <li><a href="{{route('teachers.index')}}" class="">Teacher List</a></li>
                         <li><a href="teacher-details.html">Teacher View</a></li>
                         <li><a href="" class="">Teacher Add</a></li>
                         <li><a class="">Teacher Edit</a></li>

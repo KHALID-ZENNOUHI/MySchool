@@ -11,7 +11,7 @@ class Formateur extends Model
 
     protected $fillable = ['nom', 'prenom', 'email', 'telephone', 'adresse', 'date_naissance', 'sexe', 'photo'];
 
-    public function controle()
+    public function controles()
     {
         return $this->hasMany(Controle::class);
     }

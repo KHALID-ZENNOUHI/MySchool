@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EtudiantController;
+use App\Http\Controllers\FormateurController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,13 @@ Route::controller(EtudiantController::class)->group(function () {
     Route::put('students/{etudiant}', 'update')->name('students.update'); 
     Route::delete('students/{etudiant}', 'destroy')->name('students.destroy'); 
     Route::get('student/profile/{id}', 'studentProfile')->name('student.profile');
+});
+
+// ------------------------ teacher -------------------------------//
+Route::controller(FormateurController::class)->group(function () {
+    Route::get('teachers', 'index')->name('teachers.index');
+    Route::get('teachers/create', 'create')->name('teachers.create'); 
+    Route::get('teachers/{formateur}/edit', 'edit')->name('teachers.edit');
+    Route::post('teachers/{formateur}', 'update')->name('teachers.update');
+    Route::post('teacher/{formateur}', 'destroy')->name('teacher.destroy');
 });

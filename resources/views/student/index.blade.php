@@ -55,7 +55,7 @@
                                         <a href="" class="btn btn-outline-gray me-2 active">
                                             <i class="fa fa-list" aria-hidden="true"></i>
                                         </a>
-                                        <a href="" class="btn btn-outline-gray me-2">
+                                        <a href="{{route('students.grid')}}" class="btn btn-outline-gray me-2">
                                             <i class="fa fa-th" aria-hidden="true"></i>
                                         </a>
                                         <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
@@ -74,6 +74,7 @@
                                                     <input class="form-check-input" type="checkbox" value="something">
                                                 </div>
                                             </th>
+                                            <th>Image</th>
                                             <th>Name</th>
                                             <th>Niveau</th>
                                             <th>Class</th>
@@ -92,16 +93,16 @@
                                                 </div>
                                             </td>
                                             {{-- <td>STD{{ ++$key }}</td> --}}
-                                            <td>{{ $student->nom }} {{ $student->prenom }}</td>
                                             {{-- <td hidden class="avatar"></td> --}}
-                                            {{-- <td>
+                                            <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="student-details.html"class="avatar avatar-sm me-2">
-                                                        <img class="avatar-img rounded-circle" src="{{ Storage::url('student-photos/'.$student->upload) }}" alt="User Image">
+                                                    <a href=""class="avatar avatar-sm me-2">
+                                                        <img class="avatar-img rounded-circle" src="{{ Storage::url($student->photo) }}" alt="User Image">
                                                     </a>
-                                                    <a href="student-details.html">{{ $student->first_name }} {{ $student->last_name }}</a>
+                                                    <a href="">{{ $student->first_name }} {{ $student->last_name }}</a>
                                                 </h2>
-                                            </td> --}}
+                                            </td>
+                                            <td>{{ $student->nom }} {{ $student->prenom }}</td>
                                             <td>{{ $student->classe->filiere->niveau->nom }}</td>
                                             <td>{{ $student->classe->nom }}</td>
                                             <td>{{ $student->responsable->nom }} {{ $student->responsable->prenom }}</td>
