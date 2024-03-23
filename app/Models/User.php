@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function etudiant()
+    {
+        return $this->hasOne(Etudiant::class);
+    }
+
+    public function formateur()
+    {
+        return $this->hasOne(Formateur::class);
+    }
 }

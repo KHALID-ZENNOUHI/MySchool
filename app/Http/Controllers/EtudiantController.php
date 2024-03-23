@@ -41,9 +41,9 @@ class EtudiantController extends Controller
     public function store(StoreEtudiantRequest $request)
     {
         $user = User::create([
-            'username' => $request->username,
+            'username' => $request->nom . ' ' . $request->prenom,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make('password'),
             'role_id' => 4,
         ]);
 
@@ -61,7 +61,7 @@ class EtudiantController extends Controller
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email_student,
-            'photo' => $request->file('photo')->store('images', 'public'),
+            'photo' => $request->file('photo')->store('students', 'public'),
             'telephone' => $request->has('telephone') ? $request->telephone : null,
             'adresse' => $request->adresse,
             'date_naissance' => $request->date_naissance,
@@ -100,8 +100,12 @@ class EtudiantController extends Controller
      */
     public function update(UpdateEtudiantRequest $request, Etudiant $etudiant)
     {
-        $responsable = Responsable::findOrFail($etudiant->responsable_id);
-        $responsable->update([
+        $etudiant->user->update([
+            'username' => $request->nom . ' ' . $request->prenom,
+            'email' => $request->email,
+        ]);
+
+        $etudiant->responsable->update([
             'nom' => $request->nom_responsable,
             'prenom' => $request->prenom_responsable,
             'cin' => $request->cin,

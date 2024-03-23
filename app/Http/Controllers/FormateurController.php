@@ -6,6 +6,9 @@ use App\Models\Formateur;
 use App\Http\Requests\StoreFormateurRequest;
 use App\Http\Requests\UpdateFormateurRequest;
 use App\Models\Classe;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class FormateurController extends Controller
 {
@@ -23,8 +26,7 @@ class FormateurController extends Controller
      */
     public function create()
     {
-        $classes = Classe::all();
-        return view('teacher.create', compact('classes'));
+        return view('teacher.create');
     }
 
     /**
@@ -32,6 +34,13 @@ class FormateurController extends Controller
      */
     public function store(StoreFormateurRequest $request)
     {
+        $user = User::create([
+            'username' => $request->nom . ' ' . $request->prenom,
+            'email' => $request->email,
+            'password' => Hash::make('password'),
+            'role_id' => 3,
+        ]);
+        
         $formateur = Formateur::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
@@ -41,6 +50,7 @@ class FormateurController extends Controller
             'adresse' => $request->adresse,
             'date_naissance' => $request->date_naissance,
             'sexe' => $request->sexe,
+            'user_id' => $user->id,
         ]);
         return redirect()->route('teachers.index')->with('message', 'Formateur ajouté avec succès');
     }
@@ -56,24 +66,52 @@ class FormateurController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Formateur $formateur)
+    public function edit(Formateur $teacher)
     {
-        //
+        return view('teacher.edit', compact('teacher'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFormateurRequest $request, Formateur $formateur)
+    public function update(UpdateFormateurRequest $request, Formateur $teacher)
     {
-        //
+        $teacher->user->update([
+            'username' => $request->nom . ' ' . $request->prenom,
+            'email' => $request->email,
+        ]);
+        
+        if ($request->hasFile('photo')) {
+
+            if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
+                Storage::disk('public')->delete($teacher->photo);
+            }
+    
+            $image = $request->file('photo')->store('formateurs', 'public');
+            $teacher->update([
+                'photo' => $image,
+            ]);
+        }
+
+        $teacher->update([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'date_naissance' => $request->date_naissance,
+            'sexe' => $request->sexe,
+        ]);
+
+        return redirect()->route('teachers.index')->with('message', 'Formateur modifié avec succès');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Formateur $formateur)
+    public function destroy(Formateur $teacher)
     {
-        //
+        $teacher->delete();
+        return redirect()->route('teachers.index')->with('message', 'Formateur supprimé avec succès');
     }
 }

@@ -54,9 +54,9 @@
                                         <i class="fa fa-list" aria-hidden="true"></i>
                                     <a href="" class="btn btn-outline-gray me-2">
                                         <i class="fa fa-th" aria-hidden="true"></i>
-                                    <a href="{{route('teachers.create')}}" class="btn btn-outline-primary me-2"><i
+                                    <a href="" class="btn btn-outline-primary me-2"><i
                                             class="fas fa-download"></i> Download</a>
-                                    <a href="" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                    <a href="{{route('teachers.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -70,19 +70,16 @@
                                                 <input class="form-check-input" type="checkbox" value="something">
                                             </div>
                                         </th>
-                                        <th>ID</th>
                                         <th>Name</th>
-                                        <th>Class</th>
+                                        {{-- <th>Class</th> --}}
                                         <th>Gender</th>
-                                        <th>Subject</th>
-                                        <th>Section</th>
                                         <th>Mobile Number</th>
                                         <th>Address</th>
                                         <th class="text-end">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($teachers as $list)
+                                    @foreach ($teachers as $teacher)
                                     <tr>
                                         <td>
                                             <div class="form-check check-tables">
@@ -90,29 +87,23 @@
                                                     value="something">
                                             </div>
                                         </td>
-                                        <td hidden class="user_id
-                                        "></td>
-                                        <td></td>
                                         <td>
                                             <h2 class="table-avatar">
-                                                <a href="teacher-details.html" class="avatar avatar-sm me-2">
-                                                    <img class="avatar-img rounded-circle" src="" alt="">
+                                                <a href="#" class="avatar avatar-sm me-2">
+                                                    <img class="avatar-img rounded-circle" src="{{Storage::url($teacher->photo)}}" alt="">
                                                 </a>
-                                                <a href="teacher-details.html"></a>
+                                                <a href="#">{{$teacher->nom}} {{$teacher->prenom}}</a>
                                             </h2>
                                         </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$teacher->sexe}}</td>
+                                        <td>{{$teacher->telephone}}</td>
+                                        <td>{{$teacher->adresse}}</td>
                                         <td class="text-end">
                                             <div class="actions">
-                                                <a href="" class="btn btn-sm bg-danger-light">
+                                                <a href="{{route('teachers.edit', $teacher->id)}}" class="btn btn-sm bg-danger-light">
                                                     <i class="far fa-edit me-2"></i>
                                                 </a>
-                                                <a class="btn btn-sm bg-danger-light teacher_delete" data-bs-toggle="modal" data-bs-target="#teacherDelete">
+                                                <a class="btn btn-sm bg-danger-light teacher_delete" data-bs-toggle="modal" data-bs-target="#teacherDelete{{$teacher->id}}">
                                                     <i class="far fa-trash-alt me-2"></i>
                                                 </a>
                                             </div>
@@ -130,7 +121,8 @@
 </div>
 
 {{-- model teacher delete --}}
-<div class="modal custom-modal fade" id="teacherDelete" role="dialog">
+@foreach ($teachers as $teacher)
+<div class="modal custom-modal fade" id="teacherDelete{{$teacher->id}}" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -139,8 +131,9 @@
                     <p>Are you sure want to delete?</p>
                 </div>
                 <div class="modal-btn delete-action">
-                    <form action="" method="POST">
+                    <form action="{{route('teachers.destroy', $teacher->id)}}" method="POST">
                         @csrf
+                        @method('DELETE')
                         <div class="row">
                             <input type="hidden" name="id" class="e_user_id" value="">
                             <div class="col-6">
@@ -156,6 +149,7 @@
         </div>
     </div>
 </div>
+@endforeach
 
 @section('script')
     {{-- delete js --}}

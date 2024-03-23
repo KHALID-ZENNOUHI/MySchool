@@ -49,10 +49,4 @@ Route::controller(EtudiantController::class)->group(function () {
 });
 
 // ------------------------ teacher -------------------------------//
-Route::controller(FormateurController::class)->group(function () {
-    Route::get('teachers', 'index')->name('teachers.index');
-    Route::get('teachers/create', 'create')->name('teachers.create'); 
-    Route::get('teachers/{formateur}/edit', 'edit')->name('teachers.edit');
-    Route::post('teachers/{formateur}', 'update')->name('teachers.update');
-    Route::post('teacher/{formateur}', 'destroy')->name('teacher.destroy');
-});
+Route::resource('teachers', FormateurController::class);

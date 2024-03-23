@@ -38,4 +38,9 @@ class Etudiant extends Model
     {
         return $this->hasMany(Absence::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

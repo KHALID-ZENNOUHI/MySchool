@@ -74,7 +74,6 @@
                                                     <input class="form-check-input" type="checkbox" value="something">
                                                 </div>
                                             </th>
-                                            <th>Image</th>
                                             <th>Name</th>
                                             <th>Niveau</th>
                                             <th>Class</th>
@@ -99,11 +98,10 @@
                                                     <a href=""class="avatar avatar-sm me-2">
                                                         <img class="avatar-img rounded-circle" src="{{ Storage::url($student->photo) }}" alt="User Image">
                                                     </a>
-                                                    <a href="">{{ $student->first_name }} {{ $student->last_name }}</a>
+                                                    <a href="">{{ $student->nom }} {{ $student->prenom }}</a>
                                                 </h2>
                                             </td>
-                                            <td>{{ $student->nom }} {{ $student->prenom }}</td>
-                                            <td>{{ $student->classe->filiere->niveau->nom }}</td>
+                                                <td>{{ $student->classe->filiere->niveau->nom }}</td>
                                             <td>{{ $student->classe->nom }}</td>
                                             <td>{{ $student->responsable->nom }} {{ $student->responsable->prenom }}</td>
                                             <td>{{ $student->responsable->telephone }}</td>

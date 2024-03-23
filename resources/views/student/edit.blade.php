@@ -52,39 +52,6 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Email <span class="login-danger">*</span></label>
-                                            <input type="email" class="form-control @error('email_student') is-invalid @enderror" name="email_student" placeholder="Enter Email_student" value="{{ $etudiant->email }}">
-                                            @error('email_student')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Phone </label>
-                                            <input class="form-control @error('telephone') is-invalid @enderror" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" name="telephone" placeholder="Enter Phone Number" value="{{ $etudiant->telephone }}">
-                                            @error('telephone')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Address <span class="login-danger">*</span></label>
-                                            <input class="form-control  @error('adresse') is-invalid @enderror" name="adresse" type="text" placeholder="Your Address" value="{{ $etudiant->adresse }}">
-                                            @error('adresse')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms calendar-icon">
                                             <label>Date Of Birth <span class="login-danger">*</span></label>
                                             <input class="form-control datetimepicker @error('date_naissance') is-invalid @enderror" name="date_naissance" type="text" placeholder="DD-MM-YYYY" value="{{ $etudiant->date_naissance }}">
@@ -123,6 +90,51 @@
                                     </div>
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
+                                            <label>Email <span class="login-danger">*</span></label>
+                                            <input type="email" class="form-control @error('email_student') is-invalid @enderror" name="email_student" placeholder="Enter Email_student" value="{{ $etudiant->email }}">
+                                            @error('email_student')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">   
+                                        <div class="form-group local-forms">
+                                            <label>Email Academic<span class="login-danger">*</span></label>
+                                            <input type="email" value="{{ $etudiant->user->email }}" class="form-control" name="email" placeholder="Enter Mail">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label>Phone </label>
+                                            <input class="form-control @error('telephone') is-invalid @enderror" type="text" oninput="this.value = this.value.replace(/[^\d+]/g, '').replace(/^(\+212|0)(\d{9})$/, '$1$2');" name="telephone" placeholder="Enter Phone Number" value="{{ $etudiant->telephone }}">
+                                            @error('telephone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
+                                            <label>Address <span class="login-danger">*</span></label>
+                                            <input class="form-control  @error('adresse') is-invalid @enderror" name="adresse" type="text" placeholder="Your Address" value="{{ $etudiant->adresse }}">
+                                            @error('adresse')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
                                             <input type="file" class="form-control" name="photo">
                                             @error('photo')
                                             <span class="invalid-feedback" role="alert">
@@ -137,7 +149,7 @@
                                             <select class="form-control select @error('niveau') is-invalid @enderror" name="niveau">
                                                 <option selected disabled>Please Select Niveau </option>
                                                 @foreach ($niveaux as $niveau)
-                                                    <option value="{{ $niveau->id }}" {{ $etudiant->classe->filiere->niveau->id == $niveau->id ? "selected" :""}}>{{ $niveau->nom }}</option>
+                                                    <option value="{{ $niveau->id }}" {{ $etudiant->classe->filiere->niveau->nom == $niveau->nom ? "selected" :""}}>{{ $niveau->nom }}</option>
                                                 @endforeach
                                             </select>
                                             @error('niveau')
@@ -207,6 +219,21 @@
                                     </div>
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
+                                            <label>Gender <span class="login-danger">*</span></label>
+                                            <select class="form-control select  @error('sexe_responsable') is-invalid @enderror" name="sexe_responsable">
+                                                <option selected disabled>Select Gender</option>
+                                                <option value="homme" {{ $etudiant->responsable->sexe == 'homme' ? "selected" :""}}>Male</option>
+                                                <option value="femme" {{ $etudiant->responsable->sexe == 'femme' ? "selected" :""}}>Female</option>
+                                            </select>
+                                            @error('sexe_responsable')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <div class="form-group local-forms">
                                             <label>CIN <span class="login-danger">*</span></label>
                                             <input type="text" class="form-control @error('cin') is-invalid @enderror" name="cin" placeholder="Enter cin" value="{{ $etudiant->responsable->cin }}">
                                             @error('cin')
@@ -219,7 +246,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Phone </label>
-                                            <input class="form-control @error('telephone_responsable') is-invalid @enderror" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" name="telephone_responsable" placeholder="Enter Phone Number" value="{{ $etudiant->responsable->telephone }}">
+                                            <input class="form-control @error('telephone_responsable') is-invalid @enderror" type="text" oninput="this.value = this.value.replace(/[^\d+]/g, '').replace(/^(\+212|0)(\d{9})$/, '$1$2');" name="telephone_responsable" placeholder="Enter Phone Number" value="{{ $etudiant->responsable->telephone }}">
                                             @error('telephone_responsable')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -238,58 +265,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Gender <span class="login-danger">*</span></label>
-                                            <select class="form-control select  @error('sexe_responsable') is-invalid @enderror" name="sexe_responsable">
-                                                <option selected disabled>Select Gender</option>
-                                                <option value="homme" {{ $etudiant->responsable->sexe == 'homme' ? "selected" :""}}>Male</option>
-                                                <option value="femme" {{ $etudiant->responsable->sexe == 'femme' ? "selected" :""}}>Female</option>
-                                            </select>
-                                            @error('sexe_responsable')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    {{-- <div class="col-12">
-                                        <h5 class="form-title"><span>Login Details</span></h5>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Username <span class="login-danger">*</span></label>
-                                            <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="Enter Username">
-                                            @error('username')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Email<span class="login-danger">*</span></label>
-                                            <input type="email" value="{{ old('email') }}" class="form-control" name="email" placeholder="Enter Mail">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-4">
-                                        <div class="form-group local-forms">
-                                            <label>Password <span class="login-danger">*</span></label>
-                                            <input type="password" class="form-control" name="password" placeholder="Enter Password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
                                     <div class="col-12">
                                         <div class="student-submit">
                                             <button type="submit" class="btn btn-primary">Submit</button>

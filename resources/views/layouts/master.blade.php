@@ -46,20 +46,6 @@
                 <i class="fas fa-bars"></i>
             </a>
             <ul class="nav user-menu">
-                <li class="nav-item dropdown noti-dropdown language-drop me-2">
-                    <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
-                        <img src="{{ URL::to('assets/img/icons/header-icon-01.svg') }}" alt="">
-                    </a>
-                    <div class="dropdown-menu ">
-                        <div class="noti-content">
-                            <div>
-                                <a class="dropdown-item" href="javascript:;"><i class="flag flag-lr me-2"></i>English</a>
-                                <a class="dropdown-item" href="javascript:;"><i class="flag flag-kh me-2"></i>Khmer</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
                 <li class="nav-item dropdown noti-dropdown me-2">
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
                         <img src="{{ URL::to('assets/img/icons/header-icon-05.svg') }}" alt="">

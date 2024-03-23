@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateFormateurRequest extends FormRequest
 {
@@ -21,11 +22,12 @@ class UpdateFormateurRequest extends FormRequest
      */
     public function rules(): array
     {
+        $teacherID = $this->route('teacher');
         return [
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:formateurs'],
-            'telephone' => ['required', 'string', 'max:255', 'unique:formateurs'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('formateurs')->ignore($teacherID)],
+            'telephone' => ['required', 'string', 'max:255', Rule::unique('formateurs')->ignore($teacherID)],
             'adresse' => ['required', 'string', 'max:255'],
             'date_naissance' => ['required', 'date'],
             'sexe' => ['required', 'string', 'in:homme,femme'],
