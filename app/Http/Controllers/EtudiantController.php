@@ -146,6 +146,9 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
+        if ($etudiant->photo && Storage::disk('public')->exists($etudiant->photo)) {
+            Storage::disk('public')->delete($etudiant->photo);
+        }
         $etudiant->delete();
         return redirect()->route('students.index')->with('message', 'Etudiant supprimé avec succès');
     }

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdministrateurController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\FormateurController;
 use App\Http\Controllers\HomeController;
+use App\Models\Administrateur;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +52,7 @@ Route::controller(EtudiantController::class)->group(function () {
 
 // ------------------------ teacher -------------------------------//
 Route::resource('teachers', FormateurController::class);
+
+// ------------------------ Administration -------------------------------//
+Route::resource('administrateurs', AdministrateurController::class);
+

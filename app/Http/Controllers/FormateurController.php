@@ -111,6 +111,9 @@ class FormateurController extends Controller
      */
     public function destroy(Formateur $teacher)
     {
+        if ($teacher->photo && Storage::disk('public')->exists($teacher->photo)) {
+            Storage::disk('public')->delete($teacher->photo);
+        }
         $teacher->delete();
         return redirect()->route('teachers.index')->with('message', 'Formateur supprimé avec succès');
     }
