@@ -11,7 +11,7 @@ class Responsable extends Model
 
     protected $fillable = ['nom', 'prenom', 'cin', 'adresse', 'telephone', 'sexe', 'etudiant_id'];
 
-    public function etudiant()
+    public function etudiants()
     {
         return $this->hasMany(Etudiant::class);
     }

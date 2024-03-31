@@ -34,7 +34,7 @@ class Etudiant extends Model
         return $this->belongsTo(Responsable::class);
     }
 
-    public function absence()
+    public function absences()
     {
         return $this->hasMany(Absence::class);
     }

@@ -9,14 +9,14 @@ class Classe extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'filiere_id'];
+    protected $fillable = ['nom', 'filiere_id', 'formateur_id', 'annee_scolaire_id'];
 
-    public function etudiant()
+    public function etudiants()
     {
         return $this->hasMany(Etudiant::class);
     }
 
-    public function matiere()
+    public function matieres()
     {
         return $this->hasMany(Matiere::class);
     }
@@ -26,7 +26,7 @@ class Classe extends Model
         return $this->belongsTo(Filiere::class);
     }
 
-    public function controle()
+    public function controles()
     {
         return $this->hasMany(Controle::class);
     }
@@ -34,5 +34,15 @@ class Classe extends Model
     public function emploi()
     {
         return $this->belongsTo(Emploi::class);
+    }
+
+    public function formateur()
+    {
+        return $this->belongsTo(Formateur::class);
+    }
+
+    public function anneeScolaire()
+    {
+        return $this->belongsTo(AnneeScolaire::class);
     }
 }

@@ -11,7 +11,7 @@ class Niveau extends Model
 
     protected $fillable = ['nom'];
 
-    public function filiere()
+    public function filieres()
     {
         return $this->hasMany(Filiere::class);
     }

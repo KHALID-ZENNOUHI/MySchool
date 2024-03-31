@@ -11,7 +11,7 @@ class Matiere extends Model
 
     protected $fillable = ['nom'];
 
-    public function controle()
+    public function controles()
     {
         return $this->hasMany(Controle::class);
     }
