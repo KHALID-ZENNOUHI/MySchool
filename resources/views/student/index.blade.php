@@ -91,8 +91,6 @@
                                                     <input class="form-check-input" type="checkbox" value="something">
                                                 </div>
                                             </td>
-                                            {{-- <td>STD{{ ++$key }}</td> --}}
-                                            {{-- <td hidden class="avatar"></td> --}}
                                             <td>
                                                 <h2 class="table-avatar">
                                                     <a href=""class="avatar avatar-sm me-2">

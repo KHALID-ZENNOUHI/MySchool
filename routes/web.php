@@ -58,6 +58,6 @@ Route::resource('teachers', FormateurController::class);
 Route::resource('administrateurs', AdministrateurController::class);
 
 // ------------------------ Classes -------------------------------//
-Route::resource('classes', ClasseController::class);
+Route::resource('classe', ClasseController::class);
 
 

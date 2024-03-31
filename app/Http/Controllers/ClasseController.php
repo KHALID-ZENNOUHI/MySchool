@@ -22,7 +22,7 @@ class ClasseController extends Controller
         $annee_scolaires = AnneeScolaire::all();
         $formateurs = Formateur::all();
         $classes = Classe::all();
-        return view('classes.index', compact('filieres', 'niveaux', 'annee_scolaires', 'formateurs', 'classes'));
+        return view('classe.index', compact('filieres', 'niveaux', 'annee_scolaires', 'formateurs', 'classes'));
     }
 
     /**
@@ -39,7 +39,7 @@ class ClasseController extends Controller
     public function store(StoreClasseRequest $request)
     {
         Classe::create($request->all());
-        return redirect()->route('classes.index')->with('success', 'Classe créée avec succès');
+        return redirect()->route('classe.index')->with('message', 'Classe créée avec succès');
     }
 
     /**
@@ -55,7 +55,7 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-        //
+        
     }
 
     /**
@@ -63,7 +63,8 @@ class ClasseController extends Controller
      */
     public function update(UpdateClasseRequest $request, Classe $classe)
     {
-        //
+        $classe->update($request->all());
+        return redirect()->route('classe.index')->with('message', 'Classe modifiée avec succès');
     }
 
     /**
@@ -71,6 +72,7 @@ class ClasseController extends Controller
      */
     public function destroy(Classe $classe)
     {
-        //
+        $classe->delete();
+        return redirect()->route('classe.index')->with('message', 'Classe supprimée avec succès');
     }
 }
