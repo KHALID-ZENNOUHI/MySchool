@@ -44,8 +44,7 @@
                     <ul>
                         <li><a href="{{route('students.index')}}"  class="">Student List</a></li>
                         <li><a href="{{route('students.create')}}" class="">Student Add</a></li>
-                        <li><a href="" class="">Student Edit</a></li>
-                        <li><a href=""  class="">Student View</a></li>
+                        <li><a href="#"  class="">Student View</a></li>
                     </ul>
                 </li>
 
@@ -56,21 +55,18 @@
                     </a>
                     <ul>
                         <li><a href="{{route('teachers.index')}}" class="">Teacher List</a></li>
-                        <li><a href="teacher-details.html">Teacher View</a></li>
-                        <li><a href="" class="">Teacher Add</a></li>
-                        <li><a class="">Teacher Edit</a></li>
+                        <li><a href="#">Teacher View</a></li>
+                        <li><a href="{{route('teachers.create')}}" class="">Teacher Add</a></li>
                     </ul>
                 </li>
                 
                 <li class="submenu">
                     <a href="#"><i class="fas fa-building"></i>
-                        <span> Departments</span>
+                        <span> Administration</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="" class="">Department List</a></li>
-                        <li><a href="" class="">Department Add</a></li>
-                        <li><a>Department Edit</a></li>
+                        <li><a href="{{route('administrateurs.index')}}" class="">Administrateurs</a></li>
                     </ul>
                 </li>
 

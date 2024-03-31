@@ -11,7 +11,7 @@ class StoreClasseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreClasseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'required|string|max:255',
+            'annee_scolaire_id' => 'required|integer',
+            'filiere_id' => 'required|integer',
+            'formateur_id' => 'required|integer',
         ];
     }
 }

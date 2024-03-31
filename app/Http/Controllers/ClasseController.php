@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Classe;
 use App\Http\Requests\StoreClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
+use App\Models\AnneeScolaire;
+use App\Models\Filiere;
+use App\Models\Formateur;
+use App\Models\Niveau;
 
 class ClasseController extends Controller
 {
@@ -13,7 +17,12 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        //
+        $filieres = Filiere::all();
+        $niveaux = Niveau::all();
+        $annee_scolaires = AnneeScolaire::all();
+        $formateurs = Formateur::all();
+        $classes = Classe::all();
+        return view('classes.index', compact('filieres', 'niveaux', 'annee_scolaires', 'formateurs', 'classes'));
     }
 
     /**
@@ -29,7 +38,8 @@ class ClasseController extends Controller
      */
     public function store(StoreClasseRequest $request)
     {
-        //
+        Classe::create($request->all());
+        return redirect()->route('classes.index')->with('success', 'Classe créée avec succès');
     }
 
     /**
