@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministrateurController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClasseController;
+use App\Http\Controllers\CoursController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\FormateurController;
 use App\Http\Controllers\HomeController;
@@ -59,5 +60,5 @@ Route::resource('administrateurs', AdministrateurController::class);
 
 // ------------------------ Classes -------------------------------//
 Route::resource('classe', ClasseController::class);
-
+Route::resource('cours', CoursController::class);
 

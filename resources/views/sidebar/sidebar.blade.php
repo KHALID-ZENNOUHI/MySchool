@@ -43,20 +43,17 @@
                     </a>
                     <ul>
                         <li><a href="{{route('students.index')}}"  class="">Student List</a></li>
-                        <li><a href="{{route('students.create')}}" class="">Student Add</a></li>
                         <li><a href="#"  class="">Student View</a></li>
                     </ul>
                 </li>
 
                 <li class="submenu ">
-                    <a href="#"><i class="fas fa-chalkboard-teacher"></i>
+                    <a href="#"><i class="fas fa-user-tie"></i>
                         <span> Teachers</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
                         <li><a href="{{route('teachers.index')}}" class="">Teacher List</a></li>
-                        <li><a href="#">Teacher View</a></li>
-                        <li><a href="{{route('teachers.create')}}" class="">Teacher Add</a></li>
                     </ul>
                 </li>
                 
@@ -66,19 +63,18 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="{{route('administrateurs.index')}}" class="">Administrateurs</a></li>
+                        <li><a href="{{route('administrateurs.index')}}" class="">Administrateur List</a></li>
                     </ul>
                 </li>
 
                 <li class="submenu">
-                    <a href="#"><i class="fas fa-book-reader"></i>
-                        <span> Subjects</span>
+                    <a href="#"><i class="fas fa-chalkboard-teacher"></i>
+                        {{-- <i class="fas fa-book-reader"></i> --}}
+                        <span> classes</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a class="">Subject List</a></li>
-                        <li><a class="">Subject Add</a></li>
-                        <li><a>Subject Edit</a></li>
+                        <li><a href="{{route('classe.index')}}" class="">Classe List</a></li>
                     </ul>
                 </li>
 
