@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('cours', function (Blueprint $table) {
             $table->id();
-            $table->integer('jours');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
             // $table->foreignId('salle_id')->constrained();
             $table->foreignId('matiere_id')->constrained();
             $table->foreignId('formateur_id')->constrained();

@@ -22,7 +22,7 @@ class AuthController extends Controller
         
         if ($user && Hash::check($request->password, $user->password)) {
             $request->session()->put('username', $user->name);
-            $request->session()->put('id', $user->name);
+            $request->session()->put('id', $user->id);
             $request->session()->put('role', $user->role->name);
 
             if ($user->role->nom == 'admin') {

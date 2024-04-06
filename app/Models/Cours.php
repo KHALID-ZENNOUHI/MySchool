@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cours extends Model
 {
     use HasFactory;
-    protected $fillable = ['jours', 'start_time', 'end_time', 'matiere_id', 'formateur_id', 'classe_id'];
+    protected $fillable = ['jours', 'start_datetime', 'end_datetime', 'matiere_id', 'formateur_id', 'classe_id'];
+
 
     public function matiere()
     {
@@ -25,3 +26,4 @@ class Cours extends Model
         return $this->belongsTo(Classe::class);
     }
 }
+

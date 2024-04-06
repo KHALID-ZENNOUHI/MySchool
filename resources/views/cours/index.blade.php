@@ -35,56 +35,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="table-responsive">
-                            <table id="DataList" class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
-                                <thead class="student-thread"> 
-                                    <tr>
-                                        <th>
-                                            <div class="form-check check-tables">
-                                                <input class="form-check-input" type="checkbox" value="something">
-                                            </div>
-                                        </th>
-                                        <th>classe</th>
-                                        {{-- <th>Class</th> --}}
-                                        <th>formateur</th>
-                                        <th>matiere</th>
-                                        <th>jours</th>
-                                        <th>start-time</th>
-                                        <th>end-time</th>
-                                        <th class="text-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cours as $cour)
-                                    <tr>
-                                        <td>
-                                            <div class="form-check check-tables">
-                                                <input class="form-check-input" type="checkbox"
-                                                    value="something">
-                                            </div>
-                                        </td>
-                                        <td>{{$cour->classe->nom}}</td>
-                                        <td>{{$cour->formateur->nom}} {{$cour->formateur->prenom}}</td>
-                                        <td>{{$cour->matiere->nom}}</td>
-                                        <td>{{$cour->jours}}</td>
-                                        <td>{{$cour->start_time}}</td>
-                                        <td>{{$cour->end_time}}</td>
-                                        <td class="text-end">
-                                            <div class="actions">
-                                                <a href="" class="btn btn-sm bg-danger-light">
-                                                    <i class="far fa-edit me-2"></i>
-                                                </a>
-                                                <a class="btn btn-sm bg-danger-light teacher_delete" data-bs-toggle="modal" data-bs-target="#teacherDelete">
-                                                    <i class="far fa-trash-alt me-2"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        <div id="calendar"></div>
                     </div>
                 </div>
             </div>
@@ -132,27 +83,30 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="className">jours</label>
-                        <input type="number" class="form-control" name="jours" id="className">
-                    </div>
-                    <div class="form-group">
                         <label class="required" for="start_time">start_time</label>
-                        <input class="form-control lesson-timepicker {{ $errors->has('start_time') ? 'is-invalid' : '' }}" 
-                        type="time" 
-                        name="start_time" 
-                        id="start_time" 
-                        value="{{ old('start_time') }}" 
-                        required>
+                        <input class="form-control lesson-timepicker @error('start_datetime') is-invalid @enderror" 
+                            type="datetime-local" 
+                            name="start_datetime" 
+                            id="start_datetime" 
+                            value="{{ old('start_datetime') }}" 
+                            required>
+                        @error('start_datetime')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label class="required" for="start_time">end_time</label>
-                        <input class="form-control lesson-timepicker {{ $errors->has('end_time') ? 'is-invalid' : '' }}" 
-                        type="time" 
-                        name="end_time" 
-                        id="end_time" 
-                        value="{{ old('end_time') }}" 
-                        required>
+                        <input class="form-control lesson-timepicker @error('end_datetime') is-invalid @enderror" 
+                            type="datetime-local" 
+                            name="end_datetime" 
+                            id="end_datetime" 
+                            value="{{ old('end_datetime') }}" 
+                            required>
+                        @error('end_datetime')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
+                    
                     <!-- Move the Submit button inside the form -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -164,3 +118,25 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script src="{{ url('/assets/fullcalendar/index.global.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'timeGridWeek'
+            },
+            events: @json($events),
+            eventColor: 'blue',
+                // ... other FullCalendar options ... 
+        });
+        console.log(@json($events));
+        calendar.render();
+    });
+</script>
+
+@endsection
+

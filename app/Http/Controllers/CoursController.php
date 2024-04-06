@@ -8,20 +8,40 @@ use App\Http\Requests\UpdateCoursRequest;
 use App\Models\Classe;
 use App\Models\Formateur;
 use App\Models\Matiere;
+use App\Models\User;
 
 class CoursController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $cours = Cours::all();
+        if (session('role') === 'etudiant') {
+            $student = User::where('id', session('id'))->first();
+            $classe_id = $student->classe_id;
+            $cours = Cours::where('classe_id', $classe_id)->get();
+        } else {
+            $cours = Cours::all();
+        }
+
+        $events = [];
+        foreach ($cours as $cour) {
+            $events[] = [
+                'title' => $cour->formateur->nom . ' ' . $cour->formateur->prenom . ' - ' . $cour->matiere->nom,
+                'start' => $cour->start_datetime,
+                'end' => $cour->end_datetime,
+            ];
+        }
+
         $classes = Classe::all();
         $matieres = Matiere::all();
         $formateurs = Formateur::all();
 
-        return view('cours.index', compact('cours', 'classes', 'matieres', 'formateurs'));
+        return view('cours.index', compact(
+            'classes', 
+            'matieres', 
+            'formateurs', 
+            'events'
+        ));
     }
 
     /**

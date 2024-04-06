@@ -22,9 +22,8 @@ class StoreCoursRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'jours' => 'required|integer',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'start_datetime' => 'required|date_format:Y-m-d\TH:i',
+            'end_datetime' => 'required|date_format:Y-m-d\TH:i|after:start_datetime',
             'matiere_id' => 'required|exists:matieres,id',
             'formateur_id' => 'required|exists:formateurs,id',
             'classe_id' => 'required|exists:classes,id',

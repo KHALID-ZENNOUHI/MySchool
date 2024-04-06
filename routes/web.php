@@ -61,4 +61,5 @@ Route::resource('administrateurs', AdministrateurController::class);
 // ------------------------ Classes -------------------------------//
 Route::resource('classe', ClasseController::class);
 Route::resource('cours', CoursController::class);
+Route::get('/get-student-schedule', [CoursController::class, 'getStudentSchedule']);
 
