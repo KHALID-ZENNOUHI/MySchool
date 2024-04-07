@@ -6,6 +6,7 @@ use App\Models\Classe;
 use App\Http\Requests\StoreClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
 use App\Models\AnneeScolaire;
+use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Formateur;
 use App\Models\Niveau;
@@ -47,7 +48,8 @@ class ClasseController extends Controller
      */
     public function show(Classe $classe)
     {
-        //
+        $classe = Classe::findOrFail($classe->id);
+        return view('classe.show', compact('classe'));
     }
 
     /**

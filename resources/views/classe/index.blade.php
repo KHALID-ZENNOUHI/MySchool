@@ -149,7 +149,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                                                     </form>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-info-circle"></i> Details</button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{route('classe.show', $classe->id)}}"><i class="fas fa-info-circle"></i> Details</a></button>
                                                 </div>
                                             </div>
                                         </div>

@@ -131,6 +131,7 @@
             },
             events: @json($events),
             eventColor: 'blue',
+            eventBackgroundColor: 'red',
                 // ... other FullCalendar options ... 
         });
         console.log(@json($events));

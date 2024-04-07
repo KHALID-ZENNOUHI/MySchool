@@ -23,7 +23,7 @@ class AuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             $request->session()->put('username', $user->name);
             $request->session()->put('id', $user->id);
-            $request->session()->put('role', $user->role->name);
+            $request->session()->put('role', $user->role->nom);
 
             if ($user->role->nom == 'admin') {
                 return redirect()->route('home')->with('success', 'Logged in successfully');

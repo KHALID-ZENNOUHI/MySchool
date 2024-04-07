@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AdministrateurController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClasseController;
@@ -60,6 +61,9 @@ Route::resource('administrateurs', AdministrateurController::class);
 
 // ------------------------ Classes -------------------------------//
 Route::resource('classe', ClasseController::class);
-Route::resource('cours', CoursController::class);
-Route::get('/get-student-schedule', [CoursController::class, 'getStudentSchedule']);
 
+// ------------------------ Cours -------------------------------//
+Route::resource('cours', CoursController::class);
+
+// ------------------------ Activite -------------------------------//
+Route::resource('activite', ActiviteController::class);

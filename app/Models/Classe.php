@@ -45,4 +45,9 @@ class Classe extends Model
     {
         return $this->belongsTo(AnneeScolaire::class);
     }
+
+    public function activites()
+    {
+        return $this->hasMany(Activite::class);
+    }
 }

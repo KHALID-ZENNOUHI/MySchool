@@ -6,6 +6,7 @@ use App\Models\Cours;
 use App\Http\Requests\StoreCoursRequest;
 use App\Http\Requests\UpdateCoursRequest;
 use App\Models\Classe;
+use App\Models\Etudiant;
 use App\Models\Formateur;
 use App\Models\Matiere;
 use App\Models\User;
@@ -16,7 +17,7 @@ class CoursController extends Controller
     public function index()
     {
         if (session('role') === 'etudiant') {
-            $student = User::where('id', session('id'))->first();
+            $student = Etudiant::where('user_id', session('id'))->first();
             $classe_id = $student->classe_id;
             $cours = Cours::where('classe_id', $classe_id)->get();
         } else {
