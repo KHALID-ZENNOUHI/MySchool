@@ -50,12 +50,7 @@
                                     <h3 class="page-title">administrateur</h3>
                                 </div>
                                 <div class="col-auto text-end float-end ms-auto download-grp">
-                                    <a href="teachers.html" class="btn btn-outline-gray me-2 active">
-                                        <i class="fa fa-list" aria-hidden="true"></i>
-                                    <a href="" class="btn btn-outline-gray me-2">
-                                        <i class="fa fa-th" aria-hidden="true"></i>
-                                    <a href="" class="btn btn-outline-primary me-2"><i
-                                            class="fas fa-download"></i> Download</a>
+                                    
                                     <a href="{{route('administrateurs.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                 </div>
                             </div>

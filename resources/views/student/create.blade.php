@@ -10,7 +10,7 @@
                         <div class="page-sub-header">
                             <h3 class="page-title">Add Students</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{route('students.index')}}">Student</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('etudiants.index')}}">Student</a></li>
                                 <li class="breadcrumb-item active">Add Students</li>
                             </ul>
                         </div>
@@ -21,7 +21,7 @@
                 <div class="col-sm-12">
                     <div class="card comman-shadow">
                         <div class="card-body">
-                            <form action="{{route('student.store')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('etudiants.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -75,7 +75,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Gender <span class="login-danger">*</span></label>
-                                            <select class="form-control select  @error('sexe') is-invalid @enderror" name="sexe">
+                                            <select class="form-control form-select select  @error('sexe') is-invalid @enderror" name="sexe">
                                                 <option selected disabled>Select Gender</option>
                                                 <option value="homme" {{ old('sexe') == 'homme' ? "selected" :""}}>Male</option>
                                                 <option value="femme" {{ old('sexe') == 'femme' ? "selected" :""}}>Female</option>
@@ -144,7 +144,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Niveau <span class="login-danger">*</span></label>
-                                            <select class="form-control select @error('niveau') is-invalid @enderror" name="niveau">
+                                            <select class="form-control form-select select @error('niveau') is-invalid @enderror" name="niveau">
                                                 <option selected disabled>Please Select Niveau </option>
                                                 @foreach ($niveaux as $niveau)
                                                     <option value="{{ $niveau->id }}" {{ old('niveau') == $niveau->id ? "selected" :""}}>{{ $niveau->nom }}</option>
@@ -160,7 +160,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Options <span class="login-danger">*</span></label>
-                                            <select class="form-control select @error('filiere') is-invalid @enderror" name="filiere">
+                                            <select class="form-control form-select select @error('filiere') is-invalid @enderror" name="filiere">
                                                 <option selected disabled>Please Select Option </option>
                                                 @foreach ($options as $option)
                                                     <option value="{{ $option->id }}" {{ old('filiere') == $option->id ? "selected" :""}}>{{ $option->nom }}</option>
@@ -176,7 +176,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Class <span class="login-danger">*</span></label>
-                                            <select class="form-control select @error('classe_id') is-invalid @enderror" name="classe_id">
+                                            <select class="form-control form-select select @error('classe_id') is-invalid @enderror" name="classe_id">
                                                 <option selected disabled>Please Select Class </option>
                                                 @foreach ($classes as $classe)
                                                     <option value="{{ $classe->id }}" {{ old('classe_id') == $classe->id ? "selected" :""}}>{{ $classe->nom }}</option>
@@ -218,7 +218,7 @@
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
                                             <label>Gender <span class="login-danger">*</span></label>
-                                            <select class="form-control select  @error('sexe_responsable') is-invalid @enderror" name="sexe_responsable">
+                                            <select class="form-control form-select select  @error('sexe_responsable') is-invalid @enderror" name="sexe_responsable">
                                                 <option selected disabled>Select Gender</option>
                                                 <option value="homme" {{ old('sexe_responsable') == 'homme' ? "selected" :""}}>Male</option>
                                                 <option value="femme" {{ old('sexe_responsable') == 'femme' ? "selected" :""}}>Female</option>
@@ -277,3 +277,5 @@
         </div>
     </div>
 @endsection
+
+

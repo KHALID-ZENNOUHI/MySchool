@@ -73,7 +73,7 @@ class EtudiantController extends Controller
         ]);
         
 
-        return redirect()->route('students.index')->with('message', 'Etudiant ajouté avec succès');
+        return redirect()->route('etudiants.index')->with('message', 'Etudiant ajouté avec succès');
     }
 
     /**
@@ -81,7 +81,7 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
-        //
+        return view('student.show', compact('etudiant'));
     }
 
     /**
@@ -138,7 +138,7 @@ class EtudiantController extends Controller
             'classe_id' => $request->has('classe_id') ? $request->classe_id : null,
         ]);
 
-        return redirect()->route('students.index')->with('message', 'Etudiant modifié avec succès');
+        return redirect()->route('etudiants.index')->with('message', 'Etudiant modifié avec succès');
     }
 
     /**
@@ -150,12 +150,24 @@ class EtudiantController extends Controller
             Storage::disk('public')->delete($etudiant->photo);
         }
         $etudiant->delete();
-        return redirect()->route('students.index')->with('message', 'Etudiant supprimé avec succès');
+        return redirect()->route('etudiants.index')->with('message', 'Etudiant supprimé avec succès');
     }
 
     public function studentGrid()
     {
         $students = Etudiant::all();
         return view('student.grid', compact('students'));
+    }
+
+    public function getFilieres($niveauId)
+    {
+        $filieres = Filiere::where('niveau_id', $niveauId)->pluck('nom', 'id');
+        return response()->json($filieres);
+    }
+
+    public function getClasses($filiereId)
+    {
+        $classes = Classe::where('filiere_id', $filiereId)->pluck('nom', 'id');
+        return response()->json($classes);
     }
 }

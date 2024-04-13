@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->dateTime('start_datetime');
             $table->dateTime('end_datetime');
-            // $table->foreignId('salle_id')->constrained();
             $table->foreignId('matiere_id')->constrained();
             $table->foreignId('formateur_id')->constrained();
             $table->foreignId('classe_id')->constrained();
+            $table->string('color');
             $table->timestamps();
         });
     }

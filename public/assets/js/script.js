@@ -73,12 +73,12 @@
             $(".page-wrapper").css("min-height", height);
         }
     });
-    if ($('.select').length > 0) {
-        $('.select').select2({
-            minimumResultsForSearch: -1,
-            width: '100%'
-        });
-    }
+    // if ($('.select').length > 0) {
+    //     $('.select').select2({
+    //         minimumResultsForSearch: -1,
+    //         width: '100%'
+    //     });
+    // }
     if ($('#editor').length > 0) {
         ClassicEditor.create(document.querySelector('#editor'), {
             toolbar: {

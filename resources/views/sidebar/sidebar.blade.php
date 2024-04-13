@@ -42,7 +42,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="{{route('students.index')}}"  class="">Student List</a></li>
+                        <li><a href="{{route('etudiants.index')}}"  class="">Student List</a></li>
                         <li><a href="#"  class="">Student View</a></li>
                     </ul>
                 </li>

@@ -24,7 +24,7 @@ class StoreFormateurRequest extends FormRequest
         return [
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:formateurs'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:formateurs','unique:Users'],
             'telephone' => ['required', 'string', 'max:255', 'unique:formateurs'],
             'adresse' => ['required', 'string', 'max:255'],
             'date_naissance' => ['required', 'date'],

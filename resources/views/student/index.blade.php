@@ -52,14 +52,14 @@
                                         <h3 class="page-title">Students</h3>
                                     </div>
                                     <div class="col-auto text-end float-end ms-auto download-grp">
-                                        <a href="" class="btn btn-outline-gray me-2 active">
+                                        {{-- <a href="" class="btn btn-outline-gray me-2 active">
                                             <i class="fa fa-list" aria-hidden="true"></i>
                                         </a>
                                         <a href="{{route('students.grid')}}" class="btn btn-outline-gray me-2">
                                             <i class="fa fa-th" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a>
-                                        <a href="{{ route('students.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+                                        </a> --}}
+                                        {{-- <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a> --}}
+                                        <a href="{{ route('etudiants.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -106,14 +106,19 @@
                                             <td>{{$student->adresse}}</td>
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="{{route('students.edit', $student->id)}}" class="btn btn-sm bg-danger-light">
+                                                    <a href="{{route('etudiants.edit', $student->id)}}" class="btn btn-sm bg-danger-light">
                                                         <i class="far fa-edit me-2"></i>
                                                     </a>
                                                     <a class="btn btn-sm bg-danger-light student_delete" data-bs-toggle="modal" data-bs-target="#studentUser{{$student->id}}">
                                                         <i class="far fa-trash-alt me-2"></i>
                                                     </a>
+                                                    <a href="{{route('etudiants.show', $student->id)}}" class="btn btn-sm bg-danger-light">
+                                                        <i class="fas fa-eye"></i>
+
+                                                    </a>
                                                 </div>
                                             </td>
+                                            
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -137,7 +142,7 @@
                         <p>Are you sure want to delete?</p>
                     </div>
                     <div class="modal-btn delete-action">
-                        <form action="{{ route('students.destroy', $student->id) }}" method="POST">
+                        <form action="{{ route('etudiants.destroy', $student->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <div class="row">

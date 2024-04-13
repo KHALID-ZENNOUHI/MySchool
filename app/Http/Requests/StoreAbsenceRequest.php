@@ -11,7 +11,7 @@ class StoreAbsenceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreAbsenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'etudiant_id' => 'required|integer|exists:etudiants,id', 
+            'date' => 'required|date_format:Y-m-d', 
+            'duree' => 'required|in:journee,demi_journee,retard',
+            'remarques' => 'nullable|string', 
+            'justification' => 'boolean', 
         ];
     }
 }

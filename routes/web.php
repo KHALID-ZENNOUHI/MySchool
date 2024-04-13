@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AdministrateurController;
 use App\Http\Controllers\AuthController;
@@ -43,21 +44,19 @@ Route::controller(HomeController::class)->group(function () {
 
 // ------------------------ student -------------------------------//
 Route::controller(EtudiantController::class)->group(function () {
-    Route::get('students', 'index')->name('students.index'); 
     Route::get('students/grid', 'studentGrid')->name('students.grid'); 
-    Route::get('students/create', 'create')->name('students.create'); 
-    Route::post('students', 'store')->name('student.store');
-    Route::get('students/{etudiant}/edit', 'edit')->name('students.edit'); 
-    Route::put('students/{etudiant}', 'update')->name('students.update'); 
-    Route::delete('students/{etudiant}', 'destroy')->name('students.destroy'); 
-    Route::get('student/profile/{id}', 'studentProfile')->name('student.profile');
+
 });
+Route::resource('etudiants', EtudiantController::class);
 
 // ------------------------ teacher -------------------------------//
 Route::resource('teachers', FormateurController::class);
+Route::post('absence', [AbsenceController::class, 'store'])->name('absence.store');
 
 // ------------------------ Administration -------------------------------//
 Route::resource('administrateurs', AdministrateurController::class);
+Route::get('/get-filieres/{niveau}', [EtudiantController::class, 'getFilieres']);
+Route::get('/get-classes/{filiere}', [EtudiantController::class, 'getClasses']);
 
 // ------------------------ Classes -------------------------------//
 Route::resource('classe', ClasseController::class);

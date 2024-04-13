@@ -21,17 +21,9 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h3 class="page-title">Cours</h3>
-                                </div>
-                                <div class="col-auto text-end float-end ms-auto download-grp">
-                                    <a href="teachers.html" class="btn btn-outline-gray me-2 active">
-                                        <i class="fa fa-list" aria-hidden="true"></i>
-                                    <a href="" class="btn btn-outline-gray me-2">
-                                        <i class="fa fa-th" aria-hidden="true"></i>
-                                    <a href="" class="btn btn-outline-primary me-2"><i
-                                            class="fas fa-download"></i> Download</a>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCoursModal">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
+                                    <button type="button" class="btn btn-primary col-auto text-end float-end ms-auto" data-bs-toggle="modal" data-bs-target="#addCoursModal">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +98,10 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="color">Cours Color</label>
+                        <input type="color" class="form-control" id="color" name="color" value="#0a58ca">
+                    </div>
                     
                     <!-- Move the Submit button inside the form -->
                     <div class="modal-footer">
@@ -131,7 +127,6 @@
             },
             events: @json($events),
             eventColor: 'blue',
-            eventBackgroundColor: 'red',
                 // ... other FullCalendar options ... 
         });
         console.log(@json($events));

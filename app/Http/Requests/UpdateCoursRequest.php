@@ -28,6 +28,7 @@ class UpdateCoursRequest extends FormRequest
             'matiere_id' => 'required|exists:matieres,id',
             'formateur_id' => 'required|exists:formateurs,id',
             'classe_id' => 'required|exists:classes,id',
+            'color' => 'required|string',
         ];
     }
 }

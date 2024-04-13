@@ -23,7 +23,7 @@
         </div>
     </div> --}}
     <div class="col-auto text-end ms-auto download-grp mb-2">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#absenceModal">
             <i class="fas fa-plus"></i> Add Absent
         </button>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nouvelleActiviteModal">
@@ -47,27 +47,32 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Students</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    @if($classe->etudiants->count() == 0)
-                        <li class="list-group-item">No student in this class.</li>
-                    @else
-                        @foreach($classe->etudiants as $etudiant)
-                            <li class="list-group-item d-flex align-items-center">
-                                <img src="{{ Storage::url($etudiant->photo) }}" 
-                                    alt="{{ $etudiant->nom }} {{ $etudiant->prenom }}" 
-                                    class="img-thumbnail rounded-circle me-3" 
-                                    style="width: 50px; height: 50px;">
-                                {{$etudiant->nom}} {{$etudiant->prenom}}
-                            </li>
-                        @endforeach
-                    @endif
-                </ul>
-            </div>
-        </div>
+          <div class="card">
+              <div class="card-header">
+                  <h5 class="card-title">Students</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                  @if($classe->etudiants->count() == 0)
+                      <li class="list-group-item">No student in this class.</li>
+                  @else
+                      @foreach($classe->etudiants as $etudiant)
+                          <li class="list-group-item d-flex align-items-center">
+                              <img src="{{ Storage::url($etudiant->photo) }}" 
+                                  alt="{{ $etudiant->nom }} {{ $etudiant->prenom }}" 
+                                  class="img-thumbnail rounded-circle me-3" 
+                                  style="width: 50px; height: 50px;">
+                              {{$etudiant->nom}} {{$etudiant->prenom}}
+                              <!-- Eye icon link -->
+                              <a href="{{route('etudiants.show', $etudiant->id)}}" class="btn btn-sm bg-danger-light ms-auto">
+                                  <i class="far fa-eye me-2"></i>
+                              </a>
+                          </li>
+                      @endforeach
+                  @endif
+              </ul>
+          </div>
+      </div>
+      
         <!-- New Homework Section -->
         <div class="col-md-4">
         <div class="card">
@@ -198,6 +203,102 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<!-- Modal absent-->
+<div class="modal fade" id="absenceModal" tabindex="-1" aria-labelledby="absenceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="absenceModalLabel">Formulaire d'absence</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{{route('absence.store')}}">
+            @csrf
+            <div class="mb-3">
+              <label for="etudiant_id" class="col-form-label">Apprenant:</label>
+              <select class="form-select" id="etudiant_id" name="etudiant_id">
+                <!-- Add options for learners here -->
+                <option selected disabled value="">---</option>
+                @foreach($classe->etudiants as $etudiant)
+                    <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
+                @endforeach
+              </select>
+              @error('etudiant_id')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="date" class="col-form-label">Date:</label>
+              <input type="date" name="date" class="form-control" id="date" value="">
+              @error('date')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Durée d'absence:</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="duree" id="journee" value="journee">
+                <label class="form-check-label" for="journee">Journée</label>
+                @error('duree')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="duree" id="demiJournee" value="demi_journee">
+                <label class="form-check-label" for="demiJournee">Demi Journée</label>
+                @error('duree')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="duree" id="retard" value="retard">
+                <label class="form-check-label" for="retard">Retard</label>
+                @error('duree')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="remarques" class="col-form-label">Remarques:</label>
+              <textarea class="form-control" id="remarques" name="remarque"></textarea>
+              @error('remarque')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{('checked') ? 'true' : 'false'}}" name="justification" id="justification" checked>
+                <label class="form-check-label" for="justification">Justification</label>
+                @error('justification')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+              <button type="submit" class="btn btn-primary">add</button>
             </div>
           </form>
         </div>

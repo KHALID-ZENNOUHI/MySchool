@@ -25,7 +25,7 @@ class StoreActiviteRequest extends FormRequest
         return [
             'type' => ['required', 'in:exercice,avis'],
             'title' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'date_format:Y-m-d\TH:i'],
+            'date' => ['required', 'date_format:Y-m-d\TH:i','after:now'],
             'ressources' => ['required', 'string', 'max:255'],
             'description' => ['required', 'max:1000'],
             'classe_id' => ['required', 'exists:classes,id'],
