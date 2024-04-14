@@ -19,9 +19,9 @@ class CoursController extends Controller
         if (session('role') === 'etudiant') {
             $student = Etudiant::where('user_id', session('id'))->first();
             $classe_id = $student->classe_id;
-            $cours = Cours::where('classe_id', $classe_id)->get();
+            $cours = Cours::where('classe_id', $classe_id)->where('end_datetime', '>' , now())->get();
         } else {
-            $cours = Cours::all();
+            $cours = Cours::where('end_datetime', '>' , now())->get();
         }
 
         $events = [];
@@ -34,7 +34,7 @@ class CoursController extends Controller
         }
 
         $classes = Classe::all();
-        $matieres = Matiere::all();
+        $matieres = Matiere::all(); 
         $formateurs = Formateur::all();
 
         return view('cours.index', compact(
