@@ -20,26 +20,11 @@
             {{-- {!! Toastr::message() !!} --}}
             <div class="student-group-form">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search by ID ...">
+                    {{-- <div class="col-8 ms-8"> --}}
+                        <div class="form-group col-md-6 mx-auto">
+                            <input type="text" name="search" class="form-control student-search" placeholder="Search by firstName or lastName or Email...">
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search by Name ...">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search by Phone ...">
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="search-student-btn">
-                            <button type="btn" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </div>
             <div class="row">
@@ -65,8 +50,7 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table
-                                    class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                                <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
                                     <thead class="student-thread">
                                         <tr>
                                             <th>
@@ -75,6 +59,7 @@
                                                 </div>
                                             </th>
                                             <th>Name</th>
+                                            <th>Email</th>
                                             <th>Niveau</th>
                                             <th>Class</th>
                                             <th>Parent Name</th>
@@ -83,7 +68,7 @@
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="student-table-body">
                                         @foreach ($students as $student)
                                         <tr>
                                             <td>
@@ -99,7 +84,8 @@
                                                     <a href="">{{ $student->nom }} {{ $student->prenom }}</a>
                                                 </h2>
                                             </td>
-                                                <td>{{ $student->classe->filiere->niveau->nom }}</td>
+                                            <td>{{$student->email}}</td>
+                                            <td>{{ $student->classe->filiere->niveau->nom }}</td>
                                             <td>{{ $student->classe->nom }}</td>
                                             <td>{{ $student->responsable->nom }} {{ $student->responsable->prenom }}</td>
                                             <td>{{ $student->responsable->telephone }}</td>

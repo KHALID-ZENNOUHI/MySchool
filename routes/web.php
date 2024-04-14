@@ -44,7 +44,8 @@ Route::controller(HomeController::class)->group(function () {
 
 // ------------------------ student -------------------------------//
 Route::controller(EtudiantController::class)->group(function () {
-    Route::get('students/grid', 'studentGrid')->name('students.grid'); 
+    Route::get('etudiants/grid', 'studentGrid')->name('etudiants.grid');
+    Route::get('/search-student/{search}', 'searchStudent'); 
 
 });
 Route::resource('etudiants', EtudiantController::class);

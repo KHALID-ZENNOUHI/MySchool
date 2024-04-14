@@ -159,6 +159,15 @@ class EtudiantController extends Controller
         return view('student.grid', compact('students'));
     }
 
+    public function searchStudent($searchValue)
+    {
+        $students = Etudiant::where('nom', 'like', '%' . request('query') . '%')
+            ->orWhere('prenom', 'like', '%' . request('query') . '%')
+            ->orWhere('email', 'like', '%' . request('query') . '%')
+            ->get();
+        return response()->json($students);
+    }
+
     public function getFilieres($niveauId)
     {
         $filieres = Filiere::where('niveau_id', $niveauId)->pluck('nom', 'id');
