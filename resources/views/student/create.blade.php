@@ -21,7 +21,7 @@
                 <div class="col-sm-12">
                     <div class="card comman-shadow">
                         <div class="card-body">
-                            <form action="{{route('etudiants.store')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('etudiants.store')}}" id="studentForm" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="col-12 col-sm-4">
                                         <div class="form-group local-forms">
-                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}">
                                             @error('photo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

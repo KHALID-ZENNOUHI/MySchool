@@ -20,11 +20,9 @@
             {{-- {!! Toastr::message() !!} --}}
             <div class="student-group-form">
                 <div class="row">
-                    {{-- <div class="col-8 ms-8"> --}}
                         <div class="form-group col-md-6 mx-auto">
                             <input type="text" name="search" class="form-control student-search" placeholder="Search by firstName or lastName or Email...">
                         </div>
-                    {{-- </div> --}}
                 </div>
             </div>
             <div class="row">

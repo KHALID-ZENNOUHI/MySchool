@@ -21,7 +21,7 @@
                 <div class="col-sm-12">
                     <div class="card comman-shadow">
                         <div class="card-body">
-                            <form action="{{route('etudiants.update', $etudiant->id)}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('etudiants.update', $etudiant->id)}}" method="POST" id="studentForm" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
