@@ -17,38 +17,31 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card card-table comman-shadow">
-                        <div class="card-body pb-0">
-                            <div class="page-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h3 class="page-title">Students</h3>
-                                    </div>
-                                    <div class="col-auto text-end float-end ms-auto download-grp">
-                                        <a href="#" class="btn btn-outline-gray me-2"><i class="fa fa-list"></i></a>
-                                        <a href="{{route('students.grid')}}" class="btn btn-outline-gray me-2 active"><i class="fa fa-th"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container">
-                                <div class="row text-center">
-                                    @foreach ($students as $key=>$list )
-                                    <div class="col-lg-2 col-md-4 col-sm-6 mb-5"> <!-- Removed bg-secondary and rounded classes from outer div -->
-                                        <div class=" rounded-lg shadow-sm py-4 rounded bg-secondary"> <!-- Changed bg--dark to bg-dark for consistency, added rounded-lg for slightly rounded corners -->
-                                            <img src="{{Storage::url($list->photo)}}" alt="" width="100" height="100" style="object-fit: cover;" class="position-relative overflow-hidden rounded-circle mb-3 shadow-sm">
-                                            <h6 class="mb-0 text-white text-truncate"><strong>{{$list->nom}} {{$list->prenom}}</strong></h6> <!-- Corrected h6 opening tag -->
-                                            <h5 class="text-white">{{$list->classe->filiere->niveau->nom}}</h5>
-                                            <h6 class="text-white">{{$list->classe->nom}}</h6>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            
+            <div class="student-group-form">
+                <div class="row">
+                        <div class="form-group col-md-6 mx-auto">
+                            <input type="text" name="search" class="form-control student-search" placeholder="Search by firstName or lastName or Email...">
                         </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="wrapper">
+                    <div class="row d-flex flex-wrap gap-3 student-card-container">  
+                        @foreach ($students as $key=>$list )
+                        <div class="card student-card" style="width: 18rem;">
+                            <div class="card-body text-center" bis_skin_checked="1">
+                                <img src="{{Storage::url($list->photo)}}" alt="" width="100" height="100" style="object-fit: cover;" class="position-relative overflow-hidden rounded-circle mb-3 shadow-sm">
+                                {{-- <img src="" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;"> --}}
+                                <h5 class="my-3">{{$list->nom}} {{$list->prenom}}</h5>
+                                <p class="text-muted mb-1">{{$list->classe->filiere->niveau->nom}}</p>
+                                <p class="text-muted mb-4">{{$list->classe->nom}}</p>
+                                <div class="d-flex justify-content-center mb-2" bis_skin_checked="1">
+                                {{-- <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-primary" data-mdb-button-initialized="true">Follow</button> --}}
+                                <a href="{{route('etudiants.show', $list->id)}}"><button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-outline-primary ms-1" data-mdb-button-initialized="true">Profile</button></a>
+                                </div>
+                            </div>
+                        </div>
+                          @endforeach    
                     </div>
                 </div>
             </div>

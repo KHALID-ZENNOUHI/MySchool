@@ -58,8 +58,14 @@ class CoursController extends Controller
      */
     public function store(StoreCoursRequest $request)
     {
-        Cours::create($request->validated());
+        $start_datetime = $request->start_datetime;
+        $end_datetime = $request->end_datetime;
+        $cours = Cours::whereBetween($start_datetime, [$start_datetime, $end_datetime]);
+        if ($cours) {
+            return redirect()->route('login')->with('message', 'Cours already existin this time');
+        }
 
+        Cours::create($request->validated());
         return redirect()->route('cours.index')->with('success', 'Cours created succesfully.');
     }
 

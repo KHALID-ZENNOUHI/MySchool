@@ -7,20 +7,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Teachers</h3>
+                    <h3 class="page-title"><i class="fas fa-user-tie"></i>  Teachers</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Teachers</li>
+                        <li class="breadcrumb-item"><a href="index.html">Teachers</a></li>
+                        <li class="breadcrumb-item active">All Teachers</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <div class="student-group-form">
-            <div class="row">
-                    <div class="form-group col-md-6 mx-auto">
-                        <input type="text" name="search" class="form-control student-search" placeholder="Search by firstName or lastName or Email...">
-                    </div>
             </div>
         </div>
         <div class="row">
@@ -129,13 +121,24 @@
 @endforeach
 
 @section('script')
-    {{-- delete js --}}
     <script>
         $(document).on('click','.teacher_delete',function()
         {
             var _this = $(this).parents('tr');
             $('.e_user_id').val(_this.find('.user_id').text());
         });
+        $(document).ready(function() {
+            var table = $('.datatable').DataTable();
+            table.destroy(); // Destroy the existing DataTable instance
+        $('.datatable').DataTable({
+            searching: true, // Enable searching
+            // Add other options as needed
+        });
+        
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });;
     </script>
 @endsection
 

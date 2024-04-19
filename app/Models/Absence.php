@@ -9,10 +9,20 @@ class Absence extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date_debut', 'date_fin', 'etat', 'justification', 'user_id'];
+    protected $fillable = ['etudiant_id','cours_id', 'remarque', 'justification'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function Etudiant()
+    {
+        return $this->belongsTo(Etudiant::class);
+    }
+
+    public function cours()
+    {
+        return $this->belongsTo(Cours::class);
     }
 }

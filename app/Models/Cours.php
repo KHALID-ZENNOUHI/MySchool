@@ -25,5 +25,10 @@ class Cours extends Model
     {
         return $this->belongsTo(Classe::class);
     }
+
+    public function absences()
+    {
+        return $this->hasMany(Absence::class);
+    }
 }
 

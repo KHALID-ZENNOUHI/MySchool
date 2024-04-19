@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['exercice', 'avis']);
+            $table->enum('type', ['exercice', 'avis', 'exam']);
             $table->string('title');
-            $table->dateTime('date')->NULL();
-            $table->string('ressources')->NULL();
+            $table->unsignedBigInteger('matiere_id')->nullable();
+            $table->foreign('matiere_id')->references('id')->on('matieres');
+            $table->dateTime('date');
+            $table->string('ressources')->nullable();
             $table->text('description');
             $table->unsignedBigInteger('classe_id');
             $table->foreign('classe_id')->references('id')->on('classes');

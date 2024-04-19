@@ -103,25 +103,17 @@
                                         </div>
                                         <div class="personal-activity">
                                             <div class="personal-icons">
-                                                <i class="feather-calendar"></i>
+                                                <i class="feather-map-pin"></i>
                                             </div>
                                             <div class="views-personal">
                                                 <h4>Date of Birth</h4>
                                                 <h5>{{$etudiant->date_naissance}}</h5>
                                             </div>
                                         </div>
-                                        <div class="personal-activity">
-                                            <div class="personal-icons">
-                                                <i class="feather-italic"></i>
-                                            </div>
-                                            <div class="views-personal">
-                                                <h4>Language</h4>
-                                                <h5>English, French, Bangla</h5>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="personal-activity mb-0">
                                             <div class="personal-icons">
-                                                <i class="feather-map-pin"></i>
+                                                <i class="feather-mail"></i>
                                             </div>
                                             <div class="views-personal">
                                                 <h4>Address</h4>
@@ -131,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="student-personals-grp">
+                            {{-- <div class="student-personals-grp">
                                 <div class="card mb-0">
                                     <div class="card-body">
                                         <div class="heading-detail">
@@ -168,16 +160,53 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-lg-8">
                             <div class="student-personals-grp">
                                 <div class="card mb-0">
                                     <div class="card-body">
                                         <div class="heading-detail">
-                                            <h4>About Me</h4>
+                                            <h4>Responsabl Details</h4>
                                         </div>
-                                        <div class="hello-park">
+                                        <div class="personal-activity">
+                                            <div class="personal-icons">
+                                                <i class="feather-user"></i>
+                                            </div>
+                                            <div class="views-personal">
+                                                <h4>Reponsable Name</h4>
+                                                <h5>{{$etudiant->responsable->nom}} {{$etudiant->responsable->prenom}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="personal-activity">
+                                            <div class="personal-icons">
+                                                <i class="feather-phone-call"></i>
+                                            </div>
+                                            <div class="views-personal">
+                                                <h4>Responsable Mobile</h4>
+                                                <h5>{{$etudiant->responsable->telephone}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="personal-activity">
+                                            <div class="personal-icons">
+                                                <i class="feather-user"></i>
+                                            </div>
+                                            <div class="views-personal">
+                                                <h4>Gender</h4>
+                                                <h5>{{$etudiant->responsable->sexe}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="personal-activity mb-0">
+                                            <div class="personal-icons">
+                                                <i class="feather-mail"></i>
+                                            </div>
+                                            <div class="views-personal">
+                                                <h4>Address</h4>
+                                                <h5>{{$etudiant->responsable->adresse}}</h5>
+                                            </div>
+                                        </div>
+
+                                        {{-- <div class="hello-park">
                                             <h5>Hello I am Daisy Parks</h5>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                                                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -207,7 +236,7 @@
                                             <div class="educate-year">
                                                 <h6>2015 - 2017</h6>
                                                 <p class="mb-0">Master of Science at Cdm College of Engineering and Technology, Pune.</p>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

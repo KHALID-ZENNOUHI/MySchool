@@ -23,10 +23,8 @@ class StoreAbsenceRequest extends FormRequest
     {
         return [
             'etudiant_id' => 'required|integer|exists:etudiants,id', 
-            'date' => 'required|date_format:Y-m-d', 
-            'duree' => 'required|in:journee,demi_journee,retard',
-            'remarques' => 'nullable|string', 
-            'justification' => 'boolean', 
+            'cours_id' => 'required|exists:etudiants,id', 
+            'remarques' => 'nullable|string',
         ];
     }
 }

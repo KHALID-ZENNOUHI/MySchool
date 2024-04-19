@@ -2,7 +2,7 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="menu-title">
+                {{-- <li class="menu-title">
                     <span>Main Menu</span>
                 </li>
                 <li class="">
@@ -10,7 +10,7 @@
                         <i class="fas fa-cog"></i> 
                         <span>Settings</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="submenu ">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
@@ -24,7 +24,7 @@
                     </ul>
                 </li>
                 {{-- @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin') --}}
-                <li class="submenu ">
+                {{-- <li class="submenu ">
                     <a href="#">
                         <i class="fas fa-shield-alt"></i>
                         <span>User Management</span> 
@@ -33,10 +33,10 @@
                     <ul>
                         <li><a href="" class="">List Users</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- @endif --}}
 
-                <li class="submenu">
+                {{-- <li class="submenu">
                     <a href="#"><i class="fas fa-graduation-cap"></i>
                         <span> Students</span>
                         <span class="menu-arrow"></span>
@@ -45,9 +45,9 @@
                         <li><a href="{{route('etudiants.index')}}"  class="">Student List</a></li>
                         <li><a href="#"  class="">Student View</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="submenu ">
+                {{-- <li class="submenu ">
                     <a href="#"><i class="fas fa-user-tie"></i>
                         <span> Teachers</span>
                         <span class="menu-arrow"></span>
@@ -55,9 +55,9 @@
                     <ul>
                         <li><a href="{{route('teachers.index')}}" class="">Teacher List</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 
-                <li class="submenu">
+                {{-- <li class="submenu">
                     <a href="#"><i class="fas fa-building"></i>
                         <span> Administration</span>
                         <span class="menu-arrow"></span>
@@ -65,20 +65,20 @@
                     <ul>
                         <li><a href="{{route('administrateurs.index')}}" class="">Administrateur List</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="submenu">
+                {{-- <i class="fas fa-book-reader"></i> --}}
+                {{-- <li class="submenu">
                     <a href="#"><i class="fas fa-chalkboard-teacher"></i>
-                        {{-- <i class="fas fa-book-reader"></i> --}}
                         <span> classes</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
                         <li><a href="{{route('classe.index')}}" class="">Classe List</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="submenu">
+                {{-- <li class="submenu">
                     <a href="#"><i class="fas fa-clipboard"></i>
                         <span> Invoices</span>
                         <span class="menu-arrow"></span>
@@ -119,13 +119,32 @@
                 </li>
                 <li>
                     <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
+                </li> --}}
+                <li>
+                    <a href="{{route('etudiants.index')}}"  class=""><i class="fas fa-graduation-cap"></i> <span> Students</span></a>
                 </li>
+
+                <li>
+                    <a href="{{route('teachers.index')}}" class=""><i class="fas fa-user-tie"></i> <span> Teachers</span></a>
+                </li>
+
+                <li>
+                    <a href="{{route('administrateurs.index')}}" class=""><i class="fas fa-building"></i> <span> Administration</span></a>
+                </li>
+
+                <li>
+                    <a href="{{route('classe.index')}}" class=""><i class="fas fa-chalkboard-teacher"></i> <span> classes</span></a>
+                </li>
+
                 <li>
                     <a href="{{route('cours.index')}}"><i class="fas fa-calendar-day"></i> <span>Cours Calendar</span></a>
                 </li>
                 <li>
-                    <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
+                    <a href="{{route('etudiants.grid')}}"><i class="fas fa-sitemap"></i> <span>Network</span></a>
                 </li>
+                {{-- <li>
+                    <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
+                </li> --}}
             </ul>
         </div>
     </div>

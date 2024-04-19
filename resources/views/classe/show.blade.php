@@ -23,11 +23,9 @@
         </div>
     </div> --}}
     <div class="col-auto text-end ms-auto download-grp mb-2">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#absenceModal">
-            <i class="fas fa-plus"></i> Add Absent
-        </button>
+        
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nouvelleActiviteModal">
-            <i class="fas fa-plus"></i> Add Activity
+            <i class="fas fa-plus"></i> New Activity
         </button>
     </div>
     <div class="row">
@@ -39,7 +37,7 @@
                 <div class="card-body">
                     <p class="card-text"><i class="fas fa-sitemap"></i> Level: {{$classe->filiere->niveau->nom}}</p>
                     <p class="card-text"><i class="fas fa-graduation-cap"></i> Option: {{$classe->filiere->nom}}</p>
-                    <p class="card-text"><i class="fas fa-user-tie"></i> Teacher: {{$classe->formateur->nom}} {{$classe->formateur->prenom}}</p>
+                    <p class="card-text"><i class="fas fa-calendar-alt"></i> Promotion: {{$classe->anneeScolaire->annee_scolaire_start}}---{{$classe->anneeScolaire->annee_scolaire_end}}</p>
                 </div>
                 <div class="card-footer">
                     <i class="fas fa-users"></i> Total Learners: {{$classe->etudiants->count()}}
@@ -119,20 +117,164 @@
         <!-- End Homework Section -->
     </div>
 </div>
+<div class="row">
+  <div class="col-sm-12">
+      <div class="card card-table comman-shadow">
+          <div class="card-body">
+              <div class="page-header">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <h3 class="page-title">List of absences</h3>
+                      </div>
+                      <div class="col-auto text-end float-end ms-auto download-grp" data-bs-toggle="modal" data-bs-target="#absenceModal">
+                        <span class="btn btn-primary"><i class="fas fa-plus"></i></span>
+                    </div>
+                  </div>
+              </div>
 
+              <div class="table-responsive">
+                  <table class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                      <thead class="student-thread">
+                          <tr>
+                              <th>
+                                  <div class="form-check check-tables">
+                                      <input class="form-check-input" type="checkbox" value="something">
+                                  </div>
+                              </th>
+                              <th>students</th>
+                              <th>Seance</th>
+                              <th>Remarques</th>
+                              <th>Justification</th>
+                              <th class="text-end">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody class="student-table-body">
+                        @foreach ($classe->cours as $cours)
+                        @foreach($cours->absences as $absence)
+                          <tr>
+                              <td>
+                                  <div class="form-check check-tables">
+                                      <input class="form-check-input" type="checkbox" value="something">
+                                  </div>
+                              </td>
+                              <td>
+                                  <h2 class="table-avatar">
+                                      <a href=""class="avatar avatar-sm me-2">
+                                          <img class="avatar-img rounded-circle" src="{{ Storage::url($absence->Etudiant->photo) }}" alt="User Image">
+                                      </a>
+                                      <a href="">{{ $absence->Etudiant->nom }} {{ $absence->Etudiant->prenom }}</a>
+                                  </h2>
+                              </td>
+                              <td>{{ $absence->cours->matiere->nom }} ({{ $absence->cours->start_datetime }} - {{ $absence->cours->end_datetime }})</td> 
+                              <td>{{ $absence->remarque }}</td>
+                              <td>{{ $absence->justification ? 'Oui' : 'Non' }}</td>
+                              <td class="text-end">
+                                  <div class="actions">
+                                      <span class="btn btn-sm bg-danger-light">
+                                          <i class="far fa-edit me-2"></i>
+                                      </span>
+                                      <!-- Modal absent-->
+                                      <div class="modal fade" id="absenceModal" tabindex="-1" aria-labelledby="absenceModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="absenceModalLabel">Formulaire d'absence</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <form method="POST" action="{{route('absence.store')}}">
+                                                @csrf
+                                                <div class="mb-3">
+                                                  <label for="etudiant_id" class="col-form-label">Apprenant:</label>
+                                                  <select class="form-select" id="etudiant_id" name="etudiant_id">
+                                                    <!-- Add options for learners here -->
+                                                    <option selected disabled value="">---</option>
+                                                    @foreach($classe->etudiants as $etudiant)
+                                                        <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
+                                                    @endforeach
+                                                  </select>
+                                                  @error('etudiant_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                  @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                  <label for="cours_id" class="col-form-label">Seance:</label>
+                                                  <select name="cours_id" class="form-select" id="cours_id">
+                                                    @if ($classe->cours->count() > 0)
+                                                    @foreach($classe->cours as $cour)
+                                                    <option value="{{$cour->id}}">{{$cour->matiere->nom}}{{$cour->start_datetime}}-{{$cour->end_datetime}}</option>
+                                                    @endforeach
+                                                    @else
+                                                    <option value="">There is no cours for this class</option>
+                                                    @endif
+                                                  </select>
+                                                  @error('cours_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                
+                                                <div class="mb-3">
+                                                  <label for="remarques" class="col-form-label">Remarques:</label>
+                                                  <textarea class="form-control" id="remarques" name="remarque"></textarea>
+                                                  @error('remarque')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="1" name="justification" id="justification">
+                                                    <label class="form-check-label" for="justification">Justification</label>
+                                                    @error('justification')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                  </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+                                                  <button type="submit" class="btn btn-primary">add</button>
+                                                </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- end of modal edit --}}
+                                      <a class="btn btn-sm bg-danger-light student_delete" data-bs-toggle="modal" data-bs-target="#studentUser">
+                                          <i class="far fa-trash-alt me-2"></i>
+                                      </a>
+                                      <a href="" class="btn btn-sm bg-danger-light">
+                                          <i class="fas fa-eye"></i>
 
-<!-- add Activity modal -->
-<!-- Modal Trigger Button -->
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nouvelleActiviteModal">
-    Nouvelle Activité
-  </button> --}}
+                                      </a>
+                                  </div>
+                              </td>
+                              
+                          </tr>
+                          @endforeach
+                          @endforeach
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
   
   <!-- Modal -->
   <div class="modal fade" id="nouvelleActiviteModal" tabindex="-1" aria-labelledby="nouvelleActiviteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="nouvelleActiviteModalLabel">Nouvelle Activité</h5>
+          <h5 class="modal-title" id="nouvelleActiviteModalLabel">New Activity</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -143,9 +285,26 @@
             <div class="mb-3">
               <label for="activiteType" class="form-label">Activity Type</label>
               <select class="form-select" id="activiteType" name="type" required>
-                <option selected disabled value="">---</option>
-                <option value="exercice">exercice</option>
-                <option value="avis">avis</option>
+                <option selected disabled value="">--</option>
+                <option value="exam">Exam</option>
+                <option value="exercice">Exercice</option>
+                <option value="avis">Avis</option>
+                <!-- Add options here -->
+              </select>
+                @error('type')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <!-- matiere id -->
+            <div class="mb-3 matiere_id">
+              <label for="matiere_id" id="labelMatiere" class="form-label">Subjects</label>
+              <select class="form-select" id="matiere_id" name="matiere_id">
+                <option selected disabled value="">--</option>
+                @foreach($matieres as $matiere)
+                    <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
+                @endforeach
                 <!-- Add options here -->
               </select>
                 @error('type')
@@ -157,7 +316,7 @@
   
             <!-- Subject/Title -->
             <div class="mb-3">
-              <label for="title" class="form-label">Sujet/Intitulé *</label>
+              <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" id="title" name="title" required>
                 @error('title')
                 <span class="invalid-feedback" role="alert">
@@ -169,7 +328,7 @@
   
             <!-- Date and Time -->
             <div class="mb-3">
-              <label for="date" class="form-label">Date & Heure *</label>
+              <label for="date" class="form-label">Date & Hour *</label>
               <input type="datetime-local" class="form-control" id="date" name="date" required>
               `@error('date')
                 <span class="invalid-feedback" role="alert">
@@ -192,7 +351,7 @@
   
             <!-- Remarks -->
             <div class="mb-3">
-              <label for="desciprtion" class="form-label">desciprtion</label>
+              <label for="desciprtion" class="form-label">Desciprtion</label>
               <textarea class="form-control" name="description" id="desciprtion" rows="5"></textarea>
                 @error('description')
                 <span class="invalid-feedback" role="alert">
@@ -238,44 +397,23 @@
               @enderror
             </div>
             <div class="mb-3">
-              <label for="date" class="col-form-label">Date:</label>
-              <input type="date" name="date" class="form-control" id="date" value="">
-              @error('date')
+              <label for="cours_id" class="col-form-label">Seance:</label>
+              <select name="cours_id" class="form-select" id="cours_id">
+                @if ($classe->cours->count() > 0)
+                @foreach($classe->cours as $cour)
+                <option value="{{$cour->id}}">{{$cour->matiere->nom}}{{$cour->start_datetime}}-{{$cour->end_datetime}}</option>
+                @endforeach
+                @else
+                <option value="">There is no cours for this class</option>
+                @endif
+              </select>
+              @error('cours_id')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
             </div>
-            <div class="mb-3">
-              <label class="col-form-label">Durée d'absence:</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="duree" id="journee" value="journee">
-                <label class="form-check-label" for="journee">Journée</label>
-                @error('duree')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="duree" id="demiJournee" value="demi_journee">
-                <label class="form-check-label" for="demiJournee">Demi Journée</label>
-                @error('duree')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="duree" id="retard" value="retard">
-                <label class="form-check-label" for="retard">Retard</label>
-                @error('duree')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-            </div>
+            
             <div class="mb-3">
               <label for="remarques" class="col-form-label">Remarques:</label>
               <textarea class="form-control" id="remarques" name="remarque"></textarea>
@@ -287,7 +425,7 @@
             </div>
             <div class="mb-3">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="{{('checked') ? 'true' : 'false'}}" name="justification" id="justification" checked>
+                <input class="form-check-input" type="checkbox" value="1" name="justification" id="justification">
                 <label class="form-check-label" for="justification">Justification</label>
                 @error('justification')
                 <span class="invalid-feedback" role="alert">
@@ -305,4 +443,20 @@
       </div>
     </div>
   </div>
+  @section('script')
+  <script>
+    $(document).ready(function() {
+            var table = $('.datatable').DataTable();
+            table.destroy(); // Destroy the existing DataTable instance
+        $('.datatable').DataTable({
+            searching: true, // Enable searching
+            // Add other options as needed
+        });
+        
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });;
+</script>
+@endsection
 @endsection

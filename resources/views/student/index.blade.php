@@ -7,22 +7,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-sub-header">
-                            <h3 class="page-title">Students</h3>
+                            <h3 class="page-title"><i class="fas fa-graduation-cap"></i>  Students</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Student</a></li>
                                 <li class="breadcrumb-item active">All Students</li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-            {{-- message --}}
-            {{-- {!! Toastr::message() !!} --}}
-            <div class="student-group-form">
-                <div class="row">
-                        <div class="form-group col-md-6 mx-auto">
-                            <input type="text" name="search" class="form-control student-search" placeholder="Search by firstName or lastName or Email...">
-                        </div>
                 </div>
             </div>
             <div class="row">
@@ -35,13 +26,6 @@
                                         <h3 class="page-title">Students</h3>
                                     </div>
                                     <div class="col-auto text-end float-end ms-auto download-grp">
-                                        {{-- <a href="" class="btn btn-outline-gray me-2 active">
-                                            <i class="fa fa-list" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="{{route('students.grid')}}" class="btn btn-outline-gray me-2">
-                                            <i class="fa fa-th" aria-hidden="true"></i>
-                                        </a> --}}
-                                        {{-- <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a> --}}
                                         <a href="{{ route('etudiants.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                     </div>
                                 </div>
@@ -153,6 +137,14 @@
             var _this = $(this).parents('tr');
             $('.e_id').val(_this.find('.id').text());
             $('.e_avatar').val(_this.find('.avatar').text());
+        });
+        $(document).ready(function() {
+            var table = $('.datatable').DataTable();
+            table.destroy(); // Destroy the existing DataTable instance
+            $('.datatable').DataTable({
+            searching: true, // Enable searching
+            // Add other options as needed
+            });
         });
     </script>
     @endsection

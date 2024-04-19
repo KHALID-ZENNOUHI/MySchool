@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ URL::to('assets/plugins/icons/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/plugins/simple-calendar/simple-calendar.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/plugins/datatables/datatables.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ URL::to('assets/plugins/select2/css/select2.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ URL::to('assets/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
 	{{-- message toastr --}}
 	<link rel="stylesheet" href="{{ URL::to('assets/css/toastr.min.css') }}">
@@ -183,13 +183,16 @@
     <script src="{{ URL::to('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ URL::to('assets/js/main.js') }}"></script>
     <script src="{{ URL::to('assets/plugins/datatables/datatables.min.js') }}"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{ URL::to('assets/js/script.js') }}"></script>
     @yield('script')
-    {{-- <script>
+<script>
         $(document).ready(function() {
             $('.select2s-hidden-accessible').select2();
         });
-    </scrip> --}}
+        
+    $('.selectpicker').selectpicker();
+
+</scrip>
 </body>
 </html>

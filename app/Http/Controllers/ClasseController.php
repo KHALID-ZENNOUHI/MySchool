@@ -6,10 +6,13 @@ use App\Models\Classe;
 use App\Http\Requests\StoreClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
 use App\Models\AnneeScolaire;
+use App\Models\Cours;
 use App\Models\Etudiant;
 use App\Models\Filiere;
 use App\Models\Formateur;
+use App\Models\Matiere;
 use App\Models\Niveau;
+use Symfony\Component\HttpFoundation\Request;
 
 class ClasseController extends Controller
 {
@@ -21,9 +24,8 @@ class ClasseController extends Controller
         $filieres = Filiere::all();
         $niveaux = Niveau::all();
         $annee_scolaires = AnneeScolaire::all();
-        $formateurs = Formateur::all();
-        $classes = Classe::all();
-        return view('classe.index', compact('filieres', 'niveaux', 'annee_scolaires', 'formateurs', 'classes'));
+        $classes = Classe::orderBy('updated_at')->get();
+        return view('classe.index', compact('filieres', 'niveaux', 'annee_scolaires', 'classes'));
     }
 
     /**
@@ -48,8 +50,9 @@ class ClasseController extends Controller
      */
     public function show(Classe $classe)
     {
+        $matieres = Matiere::all();
         $classe = Classe::findOrFail($classe->id);
-        return view('classe.show', compact('classe'));
+        return view('classe.show', compact('classe', 'matieres'));
     }
 
     /**
@@ -76,5 +79,19 @@ class ClasseController extends Controller
     {
         $classe->delete();
         return redirect()->route('classe.index')->with('message', 'Classe supprimée avec succès');
+    }
+
+    public function search(Request $request)
+    {
+        $classSearch = $request->get('classSearch', '');
+        $classes = Classe::where('nom', 'like', '%' . $classSearch . '%')
+        ->with('filiere', function($query){
+            $query->with('niveau');
+            })
+        ->with('anneeScolaire')
+        ->withCount('etudiants')
+        ->get();
+        
+        return response()->json($classes);
     }
 }

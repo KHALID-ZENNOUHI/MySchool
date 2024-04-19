@@ -12,6 +12,8 @@ use App\Models\Responsable;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class EtudiantController extends Controller
 {
@@ -159,11 +161,16 @@ class EtudiantController extends Controller
         return view('student.grid', compact('students'));
     }
 
-    public function searchStudent($searchValue)
+    public function searchStudent(Request $request)
     {
-        $students = Etudiant::where('nom', 'like', '%' . request('query') . '%')
-            ->orWhere('prenom', 'like', '%' . request('query') . '%')
-            ->orWhere('email', 'like', '%' . request('query') . '%')
+        $studentSearch = $request->get('studentSearch', '');
+        $students = Etudiant::where('nom', 'like', '%' . $studentSearch . '%')
+            ->orWhere('prenom', 'like', '%' . $studentSearch . '%')
+            ->with('classe', function ($query) {
+                $query->with('filiere', function ($query) {
+                    $query->with('niveau');
+                });
+            })
             ->get();
         return response()->json($students);
     }

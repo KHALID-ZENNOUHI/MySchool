@@ -9,6 +9,7 @@ use App\Http\Controllers\CoursController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\FormateurController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoteController;
 use App\Models\Administrateur;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 // ----------------------------Authentification ------------------------------//
 Route::controller(AuthController::class)->group(function () {
-    Route::get('login', 'loginView')->name('login');
+    Route::get('/', 'loginView')->name('login');
     Route::post('login', 'login');
     Route::get('logout', 'logout')->name('logout');
     Route::get('forgotPassword', 'forgotPassword')->name('forgot.password');
@@ -45,7 +46,7 @@ Route::controller(HomeController::class)->group(function () {
 // ------------------------ student -------------------------------//
 Route::controller(EtudiantController::class)->group(function () {
     Route::get('etudiants/grid', 'studentGrid')->name('etudiants.grid');
-    Route::get('/search-student/{search}', 'searchStudent'); 
+    Route::get('/search-student', 'searchStudent'); 
 
 });
 Route::resource('etudiants', EtudiantController::class);
@@ -61,9 +62,14 @@ Route::get('/get-classes/{filiere}', [EtudiantController::class, 'getClasses']);
 
 // ------------------------ Classes -------------------------------//
 Route::resource('classe', ClasseController::class);
+Route::get('/search-class', [ClasseController::class, 'search']);
 
 // ------------------------ Cours -------------------------------//
 Route::resource('cours', CoursController::class);
 
 // ------------------------ Activite -------------------------------//
 Route::resource('activite', ActiviteController::class);
+
+
+// ------------------------ Notes -------------------------------//
+Route::resource('notes', NoteController::class);

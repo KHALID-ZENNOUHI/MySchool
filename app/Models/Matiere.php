@@ -15,4 +15,14 @@ class Matiere extends Model
     {
         return $this->hasMany(Controle::class);
     }
+
+    public function activites()
+    {
+        return $this->hasMany(Activite::class);
+    }
+
+    public function cours()
+    {
+        return $this->hasMany(Cours::class);
+    }
 }

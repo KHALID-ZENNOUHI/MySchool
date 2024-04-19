@@ -38,7 +38,7 @@ class Classe extends Model
 
     public function formateur()
     {
-        return $this->belongsTo(Formateur::class);
+        return $this->hasMany(Formateur::class);
     }
 
     public function anneeScolaire()
@@ -49,5 +49,10 @@ class Classe extends Model
     public function activites()
     {
         return $this->hasMany(Activite::class);
+    }
+
+    public function cours()
+    {
+        return $this->hasMany(Cours::class);
     }
 }

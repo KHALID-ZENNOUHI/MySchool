@@ -23,10 +23,11 @@ class StoreActiviteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'in:exercice,avis'],
+            'type' => ['required', 'in:exercice,avis,exam'],
             'title' => ['required', 'string', 'max:255'],
+            'matiere_id' => ['nullable', 'exists:matieres,id'],
             'date' => ['required', 'date_format:Y-m-d\TH:i','after:now'],
-            'ressources' => ['required', 'string', 'max:255'],
+            'ressources' => ['nullable', 'string', 'max:255'],
             'description' => ['required', 'max:1000'],
             'classe_id' => ['required', 'exists:classes,id'],
         ];
