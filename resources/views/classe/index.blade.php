@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="page-header">
@@ -38,9 +39,11 @@
                                         <a href="#" class="btn btn-outline-gray me-2">
                                             <i class="fa fa-th" aria-hidden="true"></i>
                                         </a>
+                                        @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -59,6 +62,7 @@
                                             <div class="card-footer text-muted">
                                                 <i class="fas fa-users"></i> Total Learners: {{$classe->etudiants->count()}}
                                             </div>
+                                            @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
                                             <div class="card-footer">
                                                 <div class="btn-group" role="group" aria-label="Options">
                                                     <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editClassModal{{$classe->id}}"><i class="fas fa-edit"></i> Edit</button>
@@ -70,12 +74,13 @@
                                                     </form>
                                                     <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{route('classe.show', $classe->id)}}"><i class="fas fa-info-circle"></i> Details</a></button>
                                                     <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                        <a href="{{route('notes.index', $classe->id)}}">
+                                                        <a href="{{route('notes.index', ['classe_id' => $classe->id])}}">
                                                             <i class="fas fa-book"></i> Notes 
                                                         </a>
                                                     </button>
                                                 </div>
                                             </div>
+                                            @endif
                                         </div>
                                     @endforeach
                                 @else
@@ -219,4 +224,19 @@
 @endforeach
 <!-- end Modal for edit classes -->
 
+@endsection
+@section('script')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var status = '{{ session("status") }}';
+
+    if (status) {
+        Swal.fire({
+            icon: 'info',
+            title: 'info !',
+            text: status,
+        });
+    }
+}); 
+</script>
 @endsection

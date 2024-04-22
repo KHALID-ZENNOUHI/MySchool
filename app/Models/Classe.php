@@ -9,7 +9,7 @@ class Classe extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'filiere_id', 'formateur_id', 'annee_scolaire_id'];
+    protected $fillable = ['nom', 'filiere_id', 'annee_scolaire_id'];
 
     public function etudiants()
     {
@@ -29,11 +29,6 @@ class Classe extends Model
     public function controles()
     {
         return $this->hasMany(Controle::class);
-    }
-
-    public function emploi()
-    {
-        return $this->belongsTo(Emploi::class);
     }
 
     public function formateur()

@@ -22,10 +22,9 @@ class UpdateClasseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => ['required', 'string', 'max:255'],
-            'filiere_id' => ['required', 'integer'],
-            'annee_scolaire_id' => ['required', 'integer'],
-            'formateur_id' => ['required', 'integer'],
+            'nom' => 'required|string|max:255',
+            'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
+            'filiere_id' => 'required|exists:filieres,id',
         ];
     }
 }
