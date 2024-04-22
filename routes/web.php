@@ -34,42 +34,45 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('resetPassword/{token}', 'resetPassword');
     Route::post('resetPassword/{token}', 'newPassword');
 });
+// Route::middleware(['Permission'])->group(function (){
+    // -------------------------- main dashboard ----------------------//
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('admin/dashboard', 'index')->name('admin.dashboard');
+        Route::get('user/profile', 'userProfile')->name('user.profile');
+        Route::get('teacher/dashboard', 'teacherDashboardIndex')->name('teacher.dashboard');
+        Route::get('student/dashboard', 'studentDashboardIndex')->name('student.dashboard');
+    });
 
-// -------------------------- main dashboard ----------------------//
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/home', 'index')->name('home');
-    Route::get('user/profile', 'userProfile')->name('user.profile');
-    Route::get('teacher/dashboard', 'teacherDashboardIndex')->name('teacher.dashboard');
-    Route::get('student/dashboard', 'studentDashboardIndex')->name('student.dashboard');
-});
+    // ------------------------ student -------------------------------//
+    Route::controller(EtudiantController::class)->group(function () {
+        Route::get('etudiants/grid', 'studentGrid')->name('etudiants.grid');
+        Route::get('/search-student', 'searchStudent'); 
 
-// ------------------------ student -------------------------------//
-Route::controller(EtudiantController::class)->group(function () {
-    Route::get('etudiants/grid', 'studentGrid')->name('etudiants.grid');
-    Route::get('/search-student', 'searchStudent'); 
+    });
+    Route::resource('etudiants', EtudiantController::class);
 
-});
-Route::resource('etudiants', EtudiantController::class);
+    // ------------------------ teacher -------------------------------//
+    Route::resource('teachers', FormateurController::class);
 
-// ------------------------ teacher -------------------------------//
-Route::resource('teachers', FormateurController::class);
-Route::post('absence', [AbsenceController::class, 'store'])->name('absence.store');
+    // ------------------------ Administration -------------------------------//
+    Route::resource('administrateurs', AdministrateurController::class);
+    Route::get('/get-filieres/{niveau}', [EtudiantController::class, 'getFilieres']);
+    Route::get('/get-classes/{filiere}', [EtudiantController::class, 'getClasses']);
 
-// ------------------------ Administration -------------------------------//
-Route::resource('administrateurs', AdministrateurController::class);
-Route::get('/get-filieres/{niveau}', [EtudiantController::class, 'getFilieres']);
-Route::get('/get-classes/{filiere}', [EtudiantController::class, 'getClasses']);
+    // ------------------------ Classes -------------------------------//
+    Route::resource('classe', ClasseController::class);
+    Route::get('/search-class', [ClasseController::class, 'search']);
 
-// ------------------------ Classes -------------------------------//
-Route::resource('classe', ClasseController::class);
-Route::get('/search-class', [ClasseController::class, 'search']);
+    // ------------------------ Cours -------------------------------//
+    Route::resource('cours', CoursController::class);
 
-// ------------------------ Cours -------------------------------//
-Route::resource('cours', CoursController::class);
-
-// ------------------------ Activite -------------------------------//
-Route::resource('activite', ActiviteController::class);
+    // ------------------------ Activite -------------------------------//
+    Route::resource('activite', ActiviteController::class);
 
 
-// ------------------------ Notes -------------------------------//
-Route::resource('notes', NoteController::class);
+    // ------------------------ Notes -------------------------------//
+    Route::resource('notes', NoteController::class);
+
+    // ------------------------ Absences -------------------------------//
+    Route::resource('absences', AbsenceController::class);
+// });
