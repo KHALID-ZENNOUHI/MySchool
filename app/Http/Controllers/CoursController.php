@@ -60,13 +60,29 @@ class CoursController extends Controller
     {
         $start_datetime = $request->start_datetime;
         $end_datetime = $request->end_datetime;
-        $cours = Cours::whereBetween($start_datetime, [$start_datetime, $end_datetime]);
-        if ($cours) {
-            return redirect()->route('login')->with('message', 'Cours already existin this time');
-        }
+        $classe = $request->classe_id;
+        
+        $cours = Cours::whereBetween('start_datetime', [$start_datetime, $end_datetime])
+            ->orWhereBetween('end_datetime', [$start_datetime, $end_datetime])
+            ->orWhere(function($query) use ($start_datetime, $end_datetime) {
+                $query->where('start_datetime', '<', $start_datetime)
+                    ->where('end_datetime', '>', $end_datetime);
+            })->get();
+            if ($cours->count() > 0){
+                foreach ($cours as $cour) {
+                    if ($cour->classe_id == $classe) {
+                        return redirect()->route('cours.index')->with('status', 'Cours already exists in this time range for this class.');
+                    }
+                }
+                foreach ($cours as $cour) {
+                    if ($cour->formateur_id == $request->formateur_id) {
+                        return redirect()->route('cours.index')->with('status', 'The teacher has already a cours in this time range.');
+                    }
+                }
+            }
 
         Cours::create($request->validated());
-        return redirect()->route('cours.index')->with('success', 'Cours created succesfully.');
+        return redirect()->route('cours.index')->with('status', 'Cours created succesfully.');
     }
 
     /**

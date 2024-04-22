@@ -21,18 +21,19 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         
         if ($user && Hash::check($request->password, $user->password)) {
-            $request->session()->put('username', $user->name);
+            $request->session()->put('username', $user->username);
             $request->session()->put('id', $user->id);
+            $request->session()->put('role_id', $user->role_id);
             $request->session()->put('role', $user->role->nom);
 
             if ($user->role->nom == 'admin') {
-                return redirect()->route('home')->with('success', 'Logged in successfully');
+                return redirect()->route('admin.dashboard')->with('status', 'Logged in successfully');
             }elseif ($user->role->nom == 'administarateur') {
-                return redirect()->route('home')->with('success', 'Logged in successfully');
+                return redirect()->route('admin.dashboard')->with('status', 'Logged in successfully');
             }elseif ($user->role->nom == 'formateur') {
-                return redirect()->route('teacher.dashboard')->with('success', 'Logged in successfully');
+                return redirect()->route('teacher.dashboard')->with('status', 'Logged in successfully');
             }elseif ($user->role->nom == 'etudiant') {
-                return redirect()->route('student.dashboard')->with('success', 'Logged in successfully');
+                return redirect()->route('student.dashboard')->with('status', 'Logged in successfully');
             }
         }
         return redirect()->route('login')->with('error', 'Invalid credentials');        

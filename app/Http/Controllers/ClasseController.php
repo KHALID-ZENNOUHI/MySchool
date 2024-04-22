@@ -41,8 +41,8 @@ class ClasseController extends Controller
      */
     public function store(StoreClasseRequest $request)
     {
-        Classe::create($request->all());
-        return redirect()->route('classe.index')->with('message', 'Classe créée avec succès');
+        Classe::create($request->validated());
+        return redirect()->route('classe.index')->with('status', 'Classe créée avec succès');
     }
 
     /**
@@ -69,7 +69,7 @@ class ClasseController extends Controller
     public function update(UpdateClasseRequest $request, Classe $classe)
     {
         $classe->update($request->all());
-        return redirect()->route('classe.index')->with('message', 'Classe modifiée avec succès');
+        return redirect()->route('classe.index')->with('status', 'Classe modifiée avec succès');
     }
 
     /**
@@ -78,7 +78,7 @@ class ClasseController extends Controller
     public function destroy(Classe $classe)
     {
         $classe->delete();
-        return redirect()->route('classe.index')->with('message', 'Classe supprimée avec succès');
+        return redirect()->route('classe.index')->with('status', 'Classe supprimée avec succès');
     }
 
     public function search(Request $request)

@@ -51,7 +51,7 @@ class AdministrateurController extends Controller
             'sexe' => $request->sexe,
             'user_id' => $user->id,
         ]);
-        return redirect()->route('administrateurs.index')->with('message', 'Formateur ajouté avec succès');
+        return redirect()->route('administrateurs.index')->with('status', 'Formateur ajouté avec succès');
     }
 
     /**
@@ -103,7 +103,7 @@ class AdministrateurController extends Controller
             'sexe' => $request->sexe,
         ]);
 
-        return redirect()->route('administrateurs.index')->with('message', 'Formateur modifié avec succès');
+        return redirect()->route('administrateurs.index')->with('status', 'Formateur modifié avec succès');
     }
 
     /**
@@ -115,6 +115,6 @@ class AdministrateurController extends Controller
             Storage::disk('public')->delete($administrateur->photo);
         }
         $administrateur->delete();
-        return redirect()->route('administrateurs.index')->with('message', 'Formateur supprimé avec succès');
+        return redirect()->route('administrateurs.index')->with('status', 'Formateur supprimé avec succès');
     }
 }

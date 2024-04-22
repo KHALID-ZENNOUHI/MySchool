@@ -52,7 +52,7 @@ class FormateurController extends Controller
             'sexe' => $request->sexe,
             'user_id' => $user->id,
         ]);
-        return redirect()->route('teachers.index')->with('message', 'Formateur ajouté avec succès');
+        return redirect()->route('teachers.index')->with('status', 'Formateur ajouté avec succès');
     }
 
     /**
@@ -103,7 +103,7 @@ class FormateurController extends Controller
             'sexe' => $request->sexe,
         ]);
 
-        return redirect()->route('teachers.index')->with('message', 'Formateur modifié avec succès');
+        return redirect()->route('teachers.index')->with('status', 'Formateur modifié avec succès');
     }
 
     /**
@@ -115,6 +115,6 @@ class FormateurController extends Controller
             Storage::disk('public')->delete($teacher->photo);
         }
         $teacher->delete();
-        return redirect()->route('teachers.index')->with('message', 'Formateur supprimé avec succès');
+        return redirect()->route('teachers.index')->with('status', 'Formateur supprimé avec succès');
     }
 }

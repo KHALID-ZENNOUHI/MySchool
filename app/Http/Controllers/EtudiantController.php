@@ -75,7 +75,7 @@ class EtudiantController extends Controller
         ]);
         
 
-        return redirect()->route('etudiants.index')->with('message', 'Etudiant ajouté avec succès');
+        return redirect()->route('etudiants.index')->with('status', 'Etudiant ajouté avec succès');
     }
 
     /**
@@ -140,7 +140,7 @@ class EtudiantController extends Controller
             'classe_id' => $request->has('classe_id') ? $request->classe_id : null,
         ]);
 
-        return redirect()->route('etudiants.index')->with('message', 'Etudiant modifié avec succès');
+        return redirect()->route('etudiants.index')->with('status', 'Etudiant modifié avec succès');
     }
 
     /**
@@ -152,7 +152,7 @@ class EtudiantController extends Controller
             Storage::disk('public')->delete($etudiant->photo);
         }
         $etudiant->delete();
-        return redirect()->route('etudiants.index')->with('message', 'Etudiant supprimé avec succès');
+        return redirect()->route('etudiants.index')->with('status', 'Etudiant supprimé avec succès');
     }
 
     public function studentGrid()

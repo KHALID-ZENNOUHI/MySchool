@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Activite;
+use App\Models\Classe;
 use App\Models\Etudiant;
 use App\Models\Matiere;
 use Illuminate\Http\Client\Request as ClientRequest;
@@ -19,14 +20,14 @@ class NoteController extends Controller
      */
     public function index(Request $request)
     {
-        $classe = $request->get('classe_id');
-        $notes = Note::where('classe_id', $classe)->get();
-        $etudiants = Etudiant::where('classe_id', $classe)->get();
+        $classe_id = $request->get('classe_id');
+        $notes = Note::where('classe_id', $classe_id)->get();
+        $classe = Classe::where('id', $classe_id)->first();
         $matieres = Matiere::all();
-        $activities = Activite::where('classe_id', $classe)
+        $activities = Activite::where('classe_id', $classe_id)
                         ->where('type', 'exam')
                         ->get();
-        return view('note.index', compact('notes', 'etudiants', 'matieres', 'activities'));
+        return view('note.index', compact('notes', 'classe', 'matieres', 'activities'));
     }
 
     /**
@@ -49,7 +50,7 @@ class NoteController extends Controller
         $note->note = $request->note;
         $note->classe_id = $request->classe_id;
         $note->save();
-        return redirect()->back()->with('success', 'Note ajoutée avec succès');
+        return redirect()->back()->with('status', 'Note ajoutée avec succès');
     }
 
     /**
