@@ -135,7 +135,7 @@
                         <label for="etudiants" class="form-label">Student Name</label>
                         <select class="form-select" id="etudiants">
                             <option selected disabled>--Select Student--</option>
-                            @foreach ($etudiants as $etudiant)
+                            @foreach ($classe->etudiants as $etudiant)
                             <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
                             @endforeach
                         </select>
@@ -205,7 +205,7 @@
                 table.search(this.value).draw();
             });
             $('#etudiants').select2({
-                data:@json($etudiants),
+                data:[],
                 dropdownParent: $('#addNotes form')
             });
             $('#matieres').select2({
@@ -219,6 +219,19 @@
         });
 
         
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var status = '{{ session("status") }}';
+    
+        if (status) {
+            Swal.fire({
+                icon: 'info',
+                title: 'info !',
+                text: status,
+            });
+        }
+    }); 
     </script>
 @endsection
 

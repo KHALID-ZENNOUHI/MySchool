@@ -21,9 +21,11 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <h3 class="page-title">Cours</h3>
+                                    @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
                                     <button type="button" class="btn btn-primary col-auto text-end float-end ms-auto" data-bs-toggle="modal" data-bs-target="#addCoursModal">
                                         <i class="fas fa-plus"></i>
                                     </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -131,7 +133,21 @@
         });
         console.log(@json($events));
         calendar.render();
+        
     });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var status = '{{ session("status") }}';
+
+    if (status) {
+        Swal.fire({
+            icon: 'info',
+            title: 'info !',
+            text: status,
+        });
+    }
+}); 
 </script>
 
 @endsection

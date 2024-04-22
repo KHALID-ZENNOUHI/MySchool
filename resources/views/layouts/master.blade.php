@@ -47,7 +47,7 @@
                 <i class="fas fa-bars"></i>
             </a>
             <ul class="nav user-menu">
-                <li class="nav-item dropdown noti-dropdown me-2">
+                {{-- <li class="nav-item dropdown noti-dropdown me-2">
                     <a href="#" class="dropdown-toggle nav-link header-nav-list" data-bs-toggle="dropdown">
                         <img src="{{ URL::to('assets/img/icons/header-icon-05.svg') }}" alt="">
                     </a>
@@ -125,7 +125,7 @@
                             <a href="#">View all Notifications</a>
                         </div>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="nav-item zoom-screen me-2">
                     <a href="#" class="nav-link header-nav-list win-maximize">
@@ -138,23 +138,23 @@
                         <span class="user-img">
                             <img class="rounded-circle" src="/images/{{ Session::get('avatar') }}" width="31"alt="{{ Session::get('name') }}">
                             <div class="user-text">
-                                <h6>{{ Session::get('name') }}</h6>
-                                <p class="text-muted mb-0">{{ Session::get('role_name') }}</p>
+                                <h6>{{ Session::get('username') }}</h6>
+                                <p class="text-muted mb-0">{{ Session::get('role') }}</p>
                             </div>
                         </span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="/images/{{ Session::get('avatar') }}" alt="{{ Session::get('name') }}" class="avatar-img rounded-circle">
+                                <img src="/images/" alt="" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>{{ Session::get('name') }}</h6>
-                                <p class="text-muted mb-0">{{ Session::get('role_name') }}</p>
+                                <h6>{{ Session::get('username') }}</h6>
+                                <p class="text-muted mb-0">{{ Session::get('role') }}</p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="">My Profile</a>
-                        <a class="dropdown-item" href="inbox.html">Inbox</a>
+                        {{-- <a class="dropdown-item" href="inbox.html">Inbox</a> --}}
                         <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                     </div>
                 </li>
@@ -185,6 +185,8 @@
     <script src="{{ URL::to('assets/plugins/datatables/datatables.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{ URL::to('assets/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('script')
 <script>
         $(document).ready(function() {
@@ -194,5 +196,6 @@
     $('.selectpicker').selectpicker();
 
 </scrip>
+
 </body>
 </html>

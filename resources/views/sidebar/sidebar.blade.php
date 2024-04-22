@@ -18,9 +18,13 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul>
-                        <li><a href="" class="">Admin Dashboard</a></li>
-                        <li><a href="" class="">Teacher Dashboard</a></li>
-                        <li><a href="" class="">Student Dashboard</a></li>
+                        @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
+                        <li><a href="{{route('admin.dashboard')}}" class="">Admin Dashboard</a></li>
+                        @elseif (Session::get('role_id') === 3)
+                        <li><a href="{{route('teacher.dashboard')}}" class="">Teacher Dashboard</a></li>
+                        @elseif (Session::get('role_id') === 4)
+                        <li><a href="{{route('student.dashboard')}}" class="">Student Dashboard</a></li>
+                        @endif
                     </ul>
                 </li>
                 {{-- @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin') --}}
@@ -120,6 +124,7 @@
                 <li>
                     <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
                 </li> --}}
+                @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
                 <li>
                     <a href="{{route('etudiants.index')}}"  class=""><i class="fas fa-graduation-cap"></i> <span> Students</span></a>
                 </li>
@@ -131,7 +136,7 @@
                 <li>
                     <a href="{{route('administrateurs.index')}}" class=""><i class="fas fa-building"></i> <span> Administration</span></a>
                 </li>
-
+                @endif
                 <li>
                     <a href="{{route('classe.index')}}" class=""><i class="fas fa-chalkboard-teacher"></i> <span> classes</span></a>
                 </li>

@@ -147,6 +147,19 @@
             });
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var status = '{{ session("status") }}';
+
+    if (status) {
+        Swal.fire({
+            icon: 'info',
+            title: 'info !',
+            text: status,
+        });
+    }
+}); 
+</script>
     @endsection
 
 @endsection
