@@ -30,7 +30,7 @@ class ActiviteController extends Controller
     public function store(StoreActiviteRequest $request)
     {
         Activite::create($request->validated());
-        return redirect()->route('classe.show', $request->classe_id)->with('message', 'Activité créée avec succès');
+        return redirect()->route('classe.show', $request->classe_id)->with('status', 'Activité créée avec succès');
     }
 
     /**
@@ -62,6 +62,7 @@ class ActiviteController extends Controller
      */
     public function destroy(Activite $activite)
     {
-        //
+        $activite->delete();
+        return redirect()->route('classe.show', $activite->classe_id)->with('status', 'Activité supprimée avec succès');
     }
 }

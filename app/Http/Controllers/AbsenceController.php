@@ -30,7 +30,7 @@ class AbsenceController extends Controller
     public function store(StoreAbsenceRequest $request)
     {
         Absence::create($request->all());
-        return back()->with('message', 'Absence enregistrée avec succès');
+        return back()->with('status', 'Absence enregistrée avec succès');
     }
 
     /**
@@ -62,6 +62,7 @@ class AbsenceController extends Controller
      */
     public function destroy(Absence $absence)
     {
-        //
+        $absence->delete();
+        return back()->with('status', 'Absence supprimée avec succès');
     }
 }
