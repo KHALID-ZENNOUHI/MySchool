@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <div class="page-wrapper">
-        <div class="content container-fluid">
+        <div class="content container-fluid" style="height: 55rem">
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
@@ -425,6 +425,16 @@
                                                                                         </span>
                                                                                     @enderror
                                                                                 </div>
+                                                                                <div class="mb-3">
+                                                                                    <label for="date"
+                                                                                        class="col-form-label">Date:</label>
+                                                                                    <input type="date" class="form-control" id="date" name="date">
+                                                                                    @error('date')
+                                                                                        <span class="invalid-feedback"
+                                                                                            role="alert">
+                                                                                            <strong>{{ $message }}</strong>
+                                                                                        </span>
+                                                                                    @enderror
 
                                                                                 <div class="mb-3">
                                                                                     <label for="remarques"
