@@ -2,14 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activite;
+use App\Models\Administrateur;
+use App\Models\AnneeScolaire;
+use App\Models\Classe;
+use App\Models\Cours;
+use App\Models\Etudiant;
+use App\Models\Formateur;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
         /** home dashboard */
         public function index()
         {
-            return view('dashboard.home');
+            $classes = Classe::all();
+            $formateurs = Formateur::all();
+            $etudiants = Etudiant::all();
+            $administrators = Administrateur::all();
+            $allAnneeScolaire = AnneeScolaire::all();
+            $anneeScolaire = [];
+            foreach ($allAnneeScolaire as $annee) {
+                array_push($anneeScolaire, $annee->nom);
+            }
+
+            $boys = [];
+            $girls = [];
+            $anneeScolaireBoys = 0;
+            $anneeScolaireGirls = 0;
+            foreach ($allAnneeScolaire as $key => $value) {
+                $class = Classe::where('annee_scolaire_id', $value->id)->get();
+                if ($class->isEmpty()) {
+                    array_push($boys, 0);
+                    array_push($girls, 0);
+                    continue;
+                }
+                foreach ($class as $key => $value) {
+                    $classBoys = Etudiant::where('classe_id', $value->id)->where('sexe', 'homme')->count();
+                    $anneeScolaireBoys += $classBoys;
+                    $classGirls = Etudiant::where('classe_id', $value->id)->where('sexe', 'femme')->count();
+                    $anneeScolaireGirls += $classGirls;
+                }
+                array_push($boys, $anneeScolaireBoys);
+                array_push($girls, $anneeScolaireGirls);
+            }
+
+
+            $anneeScolaire = json_encode($anneeScolaire);
+            $boys = json_encode($boys);
+            $girls = json_encode($girls);
+            return view('dashboard.home', compact('classes', 'formateurs', 'etudiants', 'administrators', 'anneeScolaire', 'boys', 'girls'));
         }
     
         /** profile user */
@@ -21,12 +65,38 @@ class HomeController extends Controller
         /** teacher dashboard */
         public function teacherDashboardIndex()
         {
-            return view('dashboard.teacher_dashboard');
+            $currentDateTime = Carbon::now();
+            $startOfWeek = $currentDateTime->startOfWeek();
+            $endOfWeek = $currentDateTime->endOfWeek();
+
+            $formateur = Formateur::where('user_id', Session::get('id'))->first();
+            $cours = Cours::where('formateur_id', $formateur->id)->whereBetween('start_datetime', [$startOfWeek, $endOfWeek])
+                            ->orWhere('end_datetime', [$startOfWeek, $endOfWeek])
+                            ->get();
+            $activites = Cours::where('formateur_id', $formateur->id)->whereBetween('start_datetime', [$startOfWeek, $endOfWeek])
+                            ->orWhere('end_datetime', [$startOfWeek, $endOfWeek])
+                            ->get();
+
+
+            return view('dashboard.teacher_dashboard', compact('cours', 'activites'));
         }
     
         /** student dashboard */
         public function studentDashboardIndex()
         {
-            return view('dashboard.student_dashboard');
+            $currentDateTime = Carbon::now();
+            $startOfWeek = $currentDateTime->startOfWeek();
+            $endOfWeek = $currentDateTime->endOfWeek();
+            
+
+            $classe = Etudiant::where('user_id', Session::get('id'))->first()->classe;
+            $cours = Cours::where('classe_id', $classe->id)->whereBetween('start_datetime', [$startOfWeek, $endOfWeek])
+                            ->orWhere('end_datetime', [$startOfWeek, $endOfWeek])
+                            ->get();
+            $activites = Activite::where('classe_id', $classe->id)->whereBetween('date', [$startOfWeek, $endOfWeek])->get();
+            $exams = Activite::where('classe_id', $classe->id)->whereBetween('date', [$startOfWeek, $endOfWeek])->where('type', 'exam')->get();
+            $absences = Etudiant::where('user_id', Session::get('id'))->first()->absences;
+            $notes = Etudiant::where('user_id', Session::get('id'))->first()->notes;
+            return view('dashboard.student_dashboard', compact('cours', 'absences', 'notes', 'activites', 'exams'));
         }
 }
