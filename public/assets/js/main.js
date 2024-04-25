@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.responseType = "json";
             xhr.onload = function () {
                 let data = xhr.response;
-                console.log(data);
+                // console.log(data.role_id);
                 classCards.innerHTML = "";
-                data.forEach(function (classe) {
+                data.classes.forEach(function (classe) {
                     classCards.innerHTML += `
                             <div class="col-md-4 col-lg-3 mb-4">
                                 <div class="card-header bg-info text-white fw-bold text-center">
@@ -144,20 +144,46 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                                 <div class="card-footer text-muted">
                                 <i class="fas fa-users"></i> Total Learners: ${classe.etudiants_count}
-                                </div>
-                                <div class="card-footer">
-                                    <div class="btn-group" role="group" aria-label="Options">
-                                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editClassModal${classe.id}"><i class="fas fa-edit"></i> Edit</button>
-                                        
-                                        <form method="POST" action="classe/${classe.id}">
-                                            <input type="hidden" name="_token" value="${csrf}">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-                                        </form>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
-                                    </div>
-                                </div>
-                            </div>`;
+                                </div>`;
+                    if (data.role_id == 1 || data.role_id == 2) {
+                        classCards.innerHTML += `<div class="card-footer">
+                                                        <div class="btn-group" role="group" aria-label="Options">
+                                                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editClassModal${classe.id}"><i class="fas fa-edit"></i> Edit</button>
+                                                            
+                                                            <form method="POST" action="classe/${classe.id}">
+                                                                <input type="hidden" name="_token" value="${csrf}">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                                            </form>
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                                <a href="notes?classe_id=${classe.id}">
+                                                                    <i class="fas fa-book"></i> Notes 
+                                                                </a>
+                                                            </button>
+                                                        </div>
+                                                </div>`;
+                    } else if(data.role_id == 3){
+                        classCards.innerHTML += `<div class="card-footer">
+                                                        <div class="btn-group" role="group" aria-label="Options">
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
+                                                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                                <a href="notes?classe_id=${classe.id}">
+                                                                    <i class="fas fa-book"></i> Notes 
+                                                                </a>
+                                                            </button>
+                                                        </div>
+                                                </div>`;
+                    }else if(data.role_id == 4){
+                        classCards.innerHTML += `
+                                                <div class="card-footer">
+                                                    <div class="btn-group" role="group" aria-label="Options">
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
+                                                    </div>
+                                                </div>`;
+                    }
+                    classCards.innerHTML += `</div>`;
+
                 });
             };
             xhr.send();
@@ -314,6 +340,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (activityType.value === "exam") {
                 matiereId.style.display = "block";
                 labelMatiere.style.display = "block";
+            }else {
+                matiereId.style.display = "none";
+                labelMatiere.style.display = "none";
             }
         });
     }
