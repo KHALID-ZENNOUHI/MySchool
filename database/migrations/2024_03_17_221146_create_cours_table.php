@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('matiere_id')->constrained();
             $table->foreignId('formateur_id')->constrained();
             $table->foreignId('classe_id')->constrained();
-            $table->string('color');
             $table->timestamps();
         });
     }
