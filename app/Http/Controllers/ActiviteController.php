@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activite;
 use App\Http\Requests\StoreActiviteRequest;
 use App\Http\Requests\UpdateActiviteRequest;
+use Illuminate\Support\Facades\Session;
 
 class ActiviteController extends Controller
 {
@@ -29,7 +30,7 @@ class ActiviteController extends Controller
      */
     public function store(StoreActiviteRequest $request)
     {
-        Activite::create($request->validated());
+        Activite::create(['formateur_id' => Session::get('id')] + $request->validated());
         return redirect()->route('classe.show', $request->classe_id)->with('status', 'Activité créée avec succès');
     }
 
