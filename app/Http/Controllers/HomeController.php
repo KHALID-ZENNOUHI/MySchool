@@ -9,6 +9,7 @@ use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Etudiant;
 use App\Models\Formateur;
+use App\Models\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -53,7 +54,11 @@ class HomeController extends Controller
             $anneeScolaire = json_encode($anneeScolaire);
             $boys = json_encode($boys);
             $girls = json_encode($girls);
-            return view('dashboard.home', compact('classes', 'formateurs', 'etudiants', 'administrators', 'anneeScolaire', 'boys', 'girls'));
+            
+            $todayActivities = Activite::where('date', Carbon::now()->toDateString())->get();
+            $top5Notes = Note::orderBy('note', 'desc')->take(5)->get();
+
+            return view('dashboard.home', compact('classes', 'formateurs', 'etudiants', 'administrators', 'anneeScolaire', 'boys', 'girls', 'todayActivities', 'top5Notes'));
         }
     
         /** profile user */
@@ -87,6 +92,9 @@ class HomeController extends Controller
             $currentDateTime = Carbon::now();
             $startOfWeek = $currentDateTime->startOfWeek();
             $endOfWeek = $currentDateTime->endOfWeek();
+
+            $etudiant_id = Etudiant::where('user_id', Session::get('id'))->first();
+            $notes = Note::where('etudiant_id', $etudiant_id->id)->get();
             
 
             $classe = Etudiant::where('user_id', Session::get('id'))->first()->classe;
@@ -96,7 +104,7 @@ class HomeController extends Controller
             $activites = Activite::where('classe_id', $classe->id)->whereBetween('date', [$startOfWeek, $endOfWeek])->get();
             $exams = Activite::where('classe_id', $classe->id)->whereBetween('date', [$startOfWeek, $endOfWeek])->where('type', 'exam')->get();
             $absences = Etudiant::where('user_id', Session::get('id'))->first()->absences;
-            $notes = Etudiant::where('user_id', Session::get('id'))->first()->notes;
+            // $notes = Etudiant::where('user_id', Session::get('id'))->first()->notes;
             return view('dashboard.student_dashboard', compact('cours', 'absences', 'notes', 'activites', 'exams'));
         }
 }
