@@ -57,7 +57,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><i class="fas fa-sitemap"></i> Level: {{$classe->filiere->niveau->nom}}</p>
                                                 <p class="card-text"><i class="fas fa-graduation-cap"></i> Option: {{$classe->filiere->nom}}</p>
-                                                    <p class="card-text"><i class="fas fa-calendar-alt"></i> Promotion: {{$classe->anneeScolaire->annee_scolaire_start}}---{{$classe->anneeScolaire->annee_scolaire_end}}</p>
+                                                    <p class="card-text"><i class="fas fa-calendar-alt"></i> Promotion: {{$classe->anneeScolaire->nom}}</p>
                                             </div>
                                             <div class="card-footer text-muted">
                                                 <i class="fas fa-users"></i> Total Learners: {{$classe->etudiants->count()}}
@@ -78,6 +78,24 @@
                                                             <i class="fas fa-book"></i> Notes 
                                                         </a>
                                                     </button>
+                                                </div>
+                                            </div>
+                                            @elseif (Session::get('role_id') === 3)
+                                            <div class="card-footer">
+                                                <div class="btn-group" role="group" aria-label="Options">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{route('classe.show', $classe->id)}}"><i class="fas fa-info-circle"></i> Details</a></button>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                                        <a href="{{route('notes.index', ['classe_id' => $classe->id])}}">
+                                                            <i class="fas fa-book"></i> Notes 
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            @elseif (Session::get('role_id') === 4)
+                                            <div class="card-footer">
+                                                <div class="btn-group" role="group" aria-label="Options">
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{route('classe.show', $classe->id)}}"><i class="fas fa-info-circle"></i> Details</a></button>
+                                                    
                                                 </div>
                                             </div>
                                             @endif
