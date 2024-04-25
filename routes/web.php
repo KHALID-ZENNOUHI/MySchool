@@ -34,7 +34,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('resetPassword/{token}', 'resetPassword');
     Route::post('resetPassword/{token}', 'newPassword');
 });
-// Route::middleware(['Permission'])->group(function (){
+Route::middleware(['Permission'])->group(function (){
     // -------------------------- main dashboard ----------------------//
     Route::controller(HomeController::class)->group(function () {
         Route::get('admin/dashboard', 'index')->name('admin.dashboard');
@@ -75,4 +75,4 @@ Route::controller(AuthController::class)->group(function () {
 
     // ------------------------ Absences -------------------------------//
     Route::resource('absences', AbsenceController::class);
-// });
+});
