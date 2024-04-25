@@ -22,10 +22,10 @@ class FormateurFactory extends Factory
             'date_naissance' => $this->faker->date(),
             'sexe' => $this->faker->randomElement(['homme', 'femme']),
             'email' => $this->faker->unique()->safeEmail,
-            'telephone' => $this->faker->phoneNumber,
+            'telephone' => '+212' . substr($this->faker->unique()->regexify('[0-9]{9}'), 1),
             'adresse' => $this->faker->address,
             'photo' => $this->faker->imageUrl(),
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => \App\Models\User::where('role_id', 3)->first(),
         ];
     }
 }
