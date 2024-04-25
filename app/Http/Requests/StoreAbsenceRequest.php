@@ -25,6 +25,7 @@ class StoreAbsenceRequest extends FormRequest
             'etudiant_id' => 'required|integer|exists:etudiants,id', 
             'cours_id' => 'required|exists:etudiants,id', 
             'remarques' => 'nullable|string',
+            'date' => 'required|date',
         ];
     }
 }
