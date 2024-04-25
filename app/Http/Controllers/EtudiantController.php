@@ -22,7 +22,7 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        $students = Etudiant::all();
+        $students = Etudiant::orderBy('created_at', 'asc')->get();
         return view('student.index', compact('students'));
     }
 
@@ -157,7 +157,7 @@ class EtudiantController extends Controller
 
     public function studentGrid()
     {
-        $students = Etudiant::all();
+        $students = Etudiant::orderBy('created_at', 'asc')->get();
         return view('student.grid', compact('students'));
     }
 
