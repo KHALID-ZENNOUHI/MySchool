@@ -9,7 +9,7 @@ class Activite extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'date', 'ressources','title', 'description', 'classe_id'];
+    protected $fillable = ['type', 'date', 'ressources','title', 'description', 'classe_id', 'formateur_id'];
 
     public function classe()
     {
