@@ -16,7 +16,7 @@ class AdministrateurController extends Controller
      */
     public function index()
     {
-        $administrateurs = Administrateur::all();
+        $administrateurs = Administrateur::orderBy('created_at', 'asc')->get();
         return view('administration.index', compact('administrateurs'));
     }
 
