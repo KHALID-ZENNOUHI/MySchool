@@ -12,6 +12,7 @@ use App\Models\Matiere;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class NoteController extends Controller
 {
@@ -58,7 +59,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        
     }
 
     /**
