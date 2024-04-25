@@ -35,7 +35,7 @@
                             <p class="card-text"><i class="fas fa-graduation-cap"></i> Option: {{ $classe->filiere->nom }}
                             </p>
                             <p class="card-text"><i class="fas fa-calendar-alt"></i> Promotion:
-                                {{ $classe->anneeScolaire->annee_scolaire_start }}---{{ $classe->anneeScolaire->annee_scolaire_end }}
+                                {{ $classe->anneeScolaire->nom }}
                             </p>
                         </div>
                         <div class="card-footer">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4" style="height: 300px; overflow-y: scroll;">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Students</h5>
@@ -69,6 +69,7 @@
                         </ul>
                     </div>
                 </div>
+                
 
                 <!-- New Homework Section -->
                 <div class="col-md-4">
@@ -86,7 +87,7 @@
                                                     data-bs-target="#showInfoModal{{ $homework->id }}">
                                                     <strong>{{ $homework->type }}</strong>
                                                 </a>
-                                                @if (Session::get('role_id') === 3 && Session::get('role_id') === 2 && Session::get('role_id') === 1)
+                                                @if (Session::get('role_id') === 3)
                                                     <span class="float-end me-2">
                                                         <a href="#editModal{{ $homework->id }}" data-bs-toggle="modal"
                                                             data-bs-target="#editModal{{ $homework->id }}">
@@ -291,12 +292,13 @@
 
             </div>
         </div>
-        @if (Session::get('role_id') === 3 && Session::get('role_id') === 2 && Session::get('role_id') === 1)
+        @if (Session::get('role_id') === 3 || Session::get('role_id') === 2 || Session::get('role_id') === 1)
+          <div class="content container-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card card-table comman-shadow">
                         <div class="card-body">
-                            <div class="page-header">
+                            <div class="page-header"> 
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="page-title">List of absences</h3>
@@ -488,6 +490,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         @endif
 
         <!-- Modal -->
@@ -563,8 +566,7 @@
                             <!-- Resources -->
                             <div class="mb-3">
                                 <label for="ressources" class="form-label">Ressources</label>
-                                <input type="text" class="form-control" id="ressources" name="ressources"
-                                    placeholder="Lien: github, notion, google docs, video...">
+                                <input type="text" class="form-control" id="ressources" name="ressources">
                                 @error('ressources')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
