@@ -17,7 +17,7 @@ class FormateurController extends Controller
      */
     public function index()
     {
-        $teachers = Formateur::all();
+        $teachers = Formateur::orderBy('created_at', 'asc')->get();
         return view('teacher.index', compact('teachers'));
     }
 
