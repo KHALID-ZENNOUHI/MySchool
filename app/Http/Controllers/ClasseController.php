@@ -12,6 +12,7 @@ use App\Models\Filiere;
 use App\Models\Formateur;
 use App\Models\Matiere;
 use App\Models\Niveau;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 class ClasseController extends Controller
@@ -84,6 +85,7 @@ class ClasseController extends Controller
     public function search(Request $request)
     {
         $classSearch = $request->get('classSearch', '');
+        $role_id = Session::get('role_id');
         $classes = Classe::where('nom', 'like', '%' . $classSearch . '%')
         ->with('filiere', function($query){
             $query->with('niveau');
@@ -91,7 +93,8 @@ class ClasseController extends Controller
         ->with('anneeScolaire')
         ->withCount('etudiants')
         ->get();
-        
-        return response()->json($classes);
+        $data = ['classes' => $classes, 'role_id' => $role_id];
+        return response()->json($data);
     }
+
 }
