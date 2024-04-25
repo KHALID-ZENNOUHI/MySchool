@@ -25,4 +25,9 @@ class Formateur extends Model
     {
         return $this->hasMany(Classe::class);
     }
+
+    public function cours()
+    {
+        return $this->hasMany(Cours::class);
+    }
 }
