@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="page-sub-header">
-                        <h3 class="page-title">Welcome {{ Session::get('name') }}!</h3>
+                        <h3 class="page-title">Welcome {{ Session::get('username') }}!</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">{{ Session::get('name') }}</li>
+                            <li class="breadcrumb-item active">{{ Session::get('username') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -26,10 +26,10 @@
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
                                 <h6>Students</h6>
-                                <h3>50055</h3>
+                                <h3>{{$etudiants->count()}}</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-01.svg') }}" alt="Dashboard Icon">
+                                <i class="fas fa-graduation-cap text-dark"></i>
                             </div>
                         </div>
                     </div>
@@ -40,11 +40,11 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Awards</h6>
-                                <h3>50+</h3>
+                                <h6>Teachers</h6>
+                                <h3>{{$formateurs->count()}}</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-02.svg') }}" alt="Dashboard Icon">
+                                <i class="fas fa-user-tie text-dark"></i>
                             </div>
                         </div>
                     </div>
@@ -55,11 +55,11 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Department</h6>
-                                <h3>30+</h3>
+                                <h6>Classes</h6>
+                                <h3>{{$classes->count()}}</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-03.svg') }}" alt="Dashboard Icon">
+                                <i class="fas fa-chalkboard-teacher text-dark"></i>
                             </div>
                         </div>
                     </div>
@@ -70,11 +70,11 @@
                     <div class="card-body">
                         <div class="db-widgets d-flex justify-content-between align-items-center">
                             <div class="db-info">
-                                <h6>Revenue</h6>
-                                <h3>$505</h3>
+                                <h6>Administrators</h6>
+                                <h3>{{$administrators->count()}}</h3>
                             </div>
                             <div class="db-icon">
-                                <img src="{{ URL::to('assets/img/icons/dash-icon-04.svg') }}" alt="Dashboard Icon">
+                                <i class="fas fa-user text-dark"></i>
                             </div>
                         </div>
                     </div>
@@ -125,6 +125,10 @@
                             </div>
                         </div>
                     </div>
+                    {{-- @dd($anneeScolaire) --}}
+                    <div id="anneeScolaire" data-anneeScolaire="{{ $anneeScolaire    }}" hidden></div>   
+                    <div id="boys" data-boys="{{ $boys }}" hidden></div>   
+                    <div id="girls" data-girls="{{ $girls }}" hidden></div>   
                     <div class="card-body">
                         <div id="bar"></div>
                     </div>
@@ -306,52 +310,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card flex-fill fb sm-box">
-                    <div class="social-likes">
-                        <p>Like us on facebook</p>
-                        <h6>50,095</h6>
-                    </div>
-                    <div class="social-boxs">
-                        <img src="assets/img/icons/social-icon-01.svg" alt="Social Icon">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card flex-fill twitter sm-box">
-                    <div class="social-likes">
-                        <p>Follow us on twitter</p>
-                        <h6>48,596</h6>
-                    </div>
-                    <div class="social-boxs">
-                        <img src="assets/img/icons/social-icon-02.svg" alt="Social Icon">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card flex-fill insta sm-box">
-                    <div class="social-likes">
-                        <p>Follow us on instagram</p>
-                        <h6>52,085</h6>
-                    </div>
-                    <div class="social-boxs">
-                        <img src="assets/img/icons/social-icon-03.svg" alt="Social Icon">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card flex-fill linkedin sm-box">
-                    <div class="social-likes">
-                        <p>Follow us on linkedin</p>
-                        <h6>69,050</h6>
-                    </div>
-                    <div class="social-boxs">
-                        <img src="assets/img/icons/social-icon-04.svg" alt="Social Icon">
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </div>
 @endsection
