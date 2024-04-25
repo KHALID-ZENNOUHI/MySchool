@@ -90,7 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.onload = function () {
                 let data = xhr.response;
                 // let studentCard = document.querySelector(".student-card");
-                let studentCardCantainer = document.querySelector(".student-card-container");
+                let studentCardCantainer = document.querySelector(
+                    ".student-card-container"
+                );
                 if (data) {
                     studentCardCantainer.innerHTML = "";
                     data.forEach(function (student) {
@@ -108,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                         `;
                     });
-                } 
+                }
             };
             xhr.send();
         });
@@ -130,9 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
             xhr.onload = function () {
                 let data = xhr.response;
                 // console.log(data.role_id);
-                classCards.innerHTML = "";
+                content = "";
                 data.classes.forEach(function (classe) {
-                    classCards.innerHTML += `
+                    content += `
                             <div class="col-md-4 col-lg-3 mb-4">
                                 <div class="card-header bg-info text-white fw-bold text-center">
                                     <i class="fas fa-chalkboard-teacher"></i>${classe.nom}
@@ -144,9 +146,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </div>
                                 <div class="card-footer text-muted">
                                 <i class="fas fa-users"></i> Total Learners: ${classe.etudiants_count}
-                                </div>`;
+                                </div>
+                            `;
                     if (data.role_id == 1 || data.role_id == 2) {
-                        classCards.innerHTML += `<div class="card-footer">
+                        content += `<div class="card-footer">
                                                         <div class="btn-group" role="group" aria-label="Options">
                                                             <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editClassModal${classe.id}"><i class="fas fa-edit"></i> Edit</button>
                                                             
@@ -162,9 +165,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                                                 </a>
                                                             </button>
                                                         </div>
-                                                </div>`;
-                    } else if(data.role_id == 3){
-                        classCards.innerHTML += `<div class="card-footer">
+                                                </div>
+                                            `;
+                    } else if (data.role_id == 3) {
+                        content += `<div class="card-footer">
                                                         <div class="btn-group" role="group" aria-label="Options">
                                                             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
                                                             <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -173,18 +177,13 @@ document.addEventListener("DOMContentLoaded", function () {
                                                                 </a>
                                                             </button>
                                                         </div>
-                                                </div>`;
-                    }else if(data.role_id == 4){
-                        classCards.innerHTML += `
-                                                <div class="card-footer">
-                                                    <div class="btn-group" role="group" aria-label="Options">
-                                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="classe/${classe.id}"><i class="fas fa-info-circle"></i> Details</a></button>
-                                                    </div>
-                                                </div>`;
+                                                </div>
+                                            `;
                     }
-                    classCards.innerHTML += `</div>`;
-
+                    content += `</div>`;
                 });
+                console.log(content);
+                classCards.innerHTML = content;
             };
             xhr.send();
         });
@@ -330,8 +329,8 @@ document.addEventListener("DOMContentLoaded", function () {
     //hide the input of matiere_id if the type of activity is note controle
     let activityType = document.querySelector('select[name="type"]');
     let matiereId = document.querySelector('select[name="matiere_id"]');
-    let labelMatiere = document.querySelector('#labelMatiere');
-    if(matiereId &&labelMatiere) {
+    let labelMatiere = document.querySelector("#labelMatiere");
+    if (matiereId && labelMatiere) {
         matiereId.style.display = "none";
         labelMatiere.style.display = "none";
     }
@@ -340,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (activityType.value === "exam") {
                 matiereId.style.display = "block";
                 labelMatiere.style.display = "block";
-            }else {
+            } else {
                 matiereId.style.display = "none";
                 labelMatiere.style.display = "none";
             }
