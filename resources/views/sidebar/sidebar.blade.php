@@ -11,22 +11,22 @@
                         <span>Settings</span>
                     </a>
                 </li> --}}
-                <li class="submenu ">
+                {{-- <li class="submenu ">
                     <a>
                         <i class="fas fa-tachometer-alt"></i>
                         <span> Dashboard</span> 
                         <span class="menu-arrow"></span>
                     </a>
-                    <ul>
+                    <ul> --}}
                         @if (Session::get('role_id') === 1 || Session::get('role_id') === 2)
-                        <li><a href="{{route('admin.dashboard')}}" class="">Admin Dashboard</a></li>
+                        <li><a href="{{route('admin.dashboard')}}" class=""><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                         @elseif (Session::get('role_id') === 3)
-                        <li><a href="{{route('teacher.dashboard')}}" class="">Teacher Dashboard</a></li>
+                        <li><a href="{{route('teacher.dashboard')}}" class=""><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                         @elseif (Session::get('role_id') === 4)
-                        <li><a href="{{route('student.dashboard')}}" class="">Student Dashboard</a></li>
+                        <li><a href="{{route('student.dashboard')}}" class=""><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                         @endif
-                    </ul>
-                </li>
+                    {{-- </ul>
+                </li> --}}
                 {{-- @if (Session::get('role_name') === 'Admin' || Session::get('role_name') === 'Super Admin') --}}
                 {{-- <li class="submenu ">
                     <a href="#">
@@ -147,9 +147,8 @@
                 <li>
                     <a href="{{route('etudiants.grid')}}"><i class="fas fa-sitemap"></i> <span>Network</span></a>
                 </li>
-                {{-- <li>
-                    <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
-                </li> --}}
+                
+                
             </ul>
         </div>
     </div>
