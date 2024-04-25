@@ -100,10 +100,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="color">Cours Color</label>
-                        <input type="color" class="form-control" id="color" name="color" value="#0a58ca">
-                    </div>
+                    
                     
                     <!-- Move the Submit button inside the form -->
                     <div class="modal-footer">
@@ -115,11 +112,22 @@
         </div>
     </div>
 </div>
+<style>
+    .fc-event {
+        background-color: #808080 !important;
+        color: black !important;
+    }
+</style>
 @endsection
+
+
+    
+
 @section('script')
 <script src="{{ url('/assets/fullcalendar/index.global.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
@@ -127,14 +135,16 @@
                 center: 'title',
                 right: 'timeGridWeek'
             },
-            events: @json($events),
-            eventColor: 'blue',
+            events: @json($events), 
+            
                 // ... other FullCalendar options ... 
         });
         console.log(@json($events));
         calendar.render();
+
         
     });
+
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -147,7 +157,8 @@
             text: status,
         });
     }
-}); 
+});
+ 
 </script>
 
 @endsection
