@@ -22,6 +22,8 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('classe_id');
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('formateur_id');
+            $table->foreign('formateur_id')->references('user_id')->on('formateurs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
