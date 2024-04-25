@@ -23,6 +23,7 @@ class AuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             $request->session()->put('username', $user->username);
             $request->session()->put('id', $user->id);
+            
             $request->session()->put('role_id', $user->role_id);
             $request->session()->put('role', $user->role->nom);
 
