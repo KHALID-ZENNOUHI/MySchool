@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['exercice', 'avis', 'exam']);
             $table->string('title');
-            $table->unsignedBigInteger('matiere_id')->nullable();
+            $table->unsignedBigInteger('matiere_id')->default(0);
             $table->foreign('matiere_id')->references('id')->on('matieres');
             $table->dateTime('date');
             $table->string('ressources')->nullable();
