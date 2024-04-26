@@ -21,13 +21,13 @@ class StoreCoursRequest extends FormRequest
      */
     public function rules(): array
     {
+        // dd($this->all());
         return [
             'start_datetime' => 'required|date_format:Y-m-d\TH:i|after:now',
             'end_datetime' => 'required|date_format:Y-m-d\TH:i|after:start_datetime',
             'matiere_id' => 'required|exists:matieres,id',
             'formateur_id' => 'required|exists:formateurs,id',
             'classe_id' => 'required|exists:classes,id',
-            'color' => 'required|string',
         ];
     }
 }
