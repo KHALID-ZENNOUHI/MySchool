@@ -140,7 +140,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="matieres" class="form-label">Subject</label>
                         <select class="form-select" id="matieres">
                             <option selected disabled>--Select Subject--</option>
@@ -148,7 +148,7 @@
                             <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="activities" class="form-label">Exam</label>
                         <select class="form-select" id="activities">
