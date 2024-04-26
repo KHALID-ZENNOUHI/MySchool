@@ -114,8 +114,8 @@
 </div>
 <style>
     .fc-event {
-        background-color: #808080 !important;
-        color: black !important;
+        background-color: #0074d9 !important;
+        color: rgb(255, 255, 255) !important;
     }
 </style>
 @endsection
