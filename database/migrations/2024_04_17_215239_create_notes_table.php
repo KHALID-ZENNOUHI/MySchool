@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('etudiant_id');
             $table->foreign('etudiant_id')->references('id')->on('etudiants');
-            $table->unsignedBigInteger('matiere_id');
-            $table->foreign('matiere_id')->references('id')->on('matieres');
+            // $table->unsignedBigInteger('matiere_id');
+            // $table->foreign('matiere_id')->references('id')->on('matieres');
             $table->unsignedBigInteger('activite_id');
             $table->foreign('activite_id')->references('id')->on('activites');
             $table->float('note');
