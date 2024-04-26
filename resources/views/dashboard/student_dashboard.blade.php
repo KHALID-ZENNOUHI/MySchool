@@ -169,3 +169,18 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+     $(document).ready(function() {
+            var table = $('.datatable').DataTable();
+            table.destroy(); // Destroy the existing DataTable instance
+            $('.datatable').DataTable({
+                searching: true, // Enable searching
+                // Add other options as needed
+            });
+            $('#searchInput').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+        });
+    </script>
+@endsection
