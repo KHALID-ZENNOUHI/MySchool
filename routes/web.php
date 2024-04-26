@@ -25,14 +25,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ----------------------------Authentification ------------------------------//
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/', 'loginView')->name('login');
-    Route::post('login', 'login');
-    Route::get('logout', 'logout')->name('logout');
-    Route::get('forgotPassword', 'forgotPassword')->name('forgot.password');
-    Route::post('forgotPassword', 'sendEmail')->name('reset.password.email');
-    Route::get('resetPassword/{token}', 'resetPassword');
-    Route::post('resetPassword/{token}', 'newPassword');
+Route::middleware(['guest'])->group(function (){
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/', 'loginView')->name('login');
+        Route::post('login', 'login');
+        Route::get('logout', 'logout')->name('logout');
+        Route::get('forgotPassword', 'forgotPassword')->name('forgot.password');
+        Route::post('forgotPassword', 'sendEmail')->name('reset.password.email');
+        Route::get('resetPassword/{token}', 'resetPassword');
+        Route::post('resetPassword/{token}', 'newPassword');
+    });
 });
 Route::middleware(['Permission'])->group(function (){
     // -------------------------- main dashboard ----------------------//
