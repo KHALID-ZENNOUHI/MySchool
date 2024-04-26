@@ -24,7 +24,7 @@ class StoreAdministrateurRequest extends FormRequest
         return [
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:administrateurs'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'telephone' => ['required', 'string', 'max:255', 'unique:administrateurs'],
             'adresse' => ['required', 'string', 'max:255'],
             'date_naissance' => ['required', 'date'],
