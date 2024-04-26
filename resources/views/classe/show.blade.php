@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <div class="page-wrapper">
-        <div class="content container-fluid" style="height: 55rem">
+        <div class="content container-fluid" style="height: 28rem">
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
@@ -80,6 +80,7 @@
                         <div class="card-body">
                             @if (count($classe->activites) > 0)
                                 <ul class="list-group">
+                                {{-- @dd($classe->activites) --}}
                                     @foreach ($classe->activites as $homework)
                                         @if ($homework->date <= date('Y-m-d H:i:s'))
                                             <li class="list-group-item">
