@@ -21,12 +21,12 @@ class StoreNoteRequest extends FormRequest
      */
     public function rules(): array
     {
-        dd($this->all());
+        // dd($this->all());
         return [
             'etudiant_id' => 'required|exists:etudiants,id',
-            'matiere_id' => 'required|exists:matieres,id',
+            // 'matiere_id' => 'required|exists:matieres,id',
             'activite_id' => 'required|exists:activites,id',
-            'note' => 'required|numeric',
+            'note' => 'required|numeric|max:20|min:0',
             'classe_id' => 'required|exists:classes,id',
         ];
     }
