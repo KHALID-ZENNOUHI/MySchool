@@ -21,20 +21,20 @@ class Note extends Model
         return $this->belongsTo(Etudiant::class);
     }
 
-    public function matiere()
+    public function activite()
     {
-        return $this->belongsTo(Matiere::class);
+        return $this->belongsTo(Activite::class);
     }
 
-    public function classe()
-    {
-        return $this->belongsTo(Classe::class);
-    }
+    // public function classe()
+    // {
+    //     return $this->belongsTo(Classe::class);
+    // }
 
-    public function getNoteAttribute($value)
-    {
-        return number_format($value, 2);
-    }
+    // public function getNoteAttribute($value)
+    // {
+    //     return number_format($value, 2);
+    // }
 
 
 }
