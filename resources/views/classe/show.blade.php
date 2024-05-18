@@ -82,7 +82,7 @@
                                 <ul class="list-group">
                                 {{-- @dd($classe->activites) --}}
                                     @foreach ($classe->activites as $homework)
-                                        @if ($homework->date <= date('Y-m-d H:i:s'))
+                                        {{-- @if ($homework->date <= date('Y-m-d H:i:s')) --}}
                                             <li class="list-group-item">
                                                 <a href="#showInfoModal{{ $homework->id }}" data-bs-toggle="modal"
                                                     data-bs-target="#showInfoModal{{ $homework->id }}">
@@ -107,11 +107,11 @@
                                                     <p class="badge bg-info">{{ $homework->title }}</p>
                                                 </span>
                                             </li>
-                                        @else
+                                        {{-- @else
                                             <li class="list-group">
                                                 <p>No homework assigned yet.</p>
                                             </li>
-                                        @endif
+                                        @endif --}}
 
 
                                         <!-- Modal to display information -->
@@ -191,6 +191,7 @@
                                                             <div class="mb-3 matiere_id">
                                                                 <label for="matiere_id" id="labelMatiere"
                                                                     class="form-label">Subjects</label>
+                                                                    {{-- @dd($matieres) --}}
                                                                 <select class="form-select" id="matiere_id"
                                                                     name="matiere_id">
                                                                     @foreach ($matieres as $matiere)
