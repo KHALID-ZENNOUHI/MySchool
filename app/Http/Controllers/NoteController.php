@@ -44,10 +44,13 @@ class NoteController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
+        // dd($request->activite_id);
+        $idMatiere = Activite::where('id', $request->activite_id)->first();
+        // dd($idMatiere->matiere_id);
         $note = new Note();
         $note->etudiant_id = $request->etudiant_id;
-        $note->matiere_id = $request->matiere_id;
         $note->activite_id = $request->activite_id;
+        // $note->matiere_id = $idMatiere->matiere_id;
         $note->note = $request->note;
         $note->classe_id = $request->classe_id;
         $note->save();
