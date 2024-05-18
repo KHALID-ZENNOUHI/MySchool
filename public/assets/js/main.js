@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <p class="text-muted mb-1">${student.classe.filiere.niveau.nom}</p>
                                 <p class="text-muted mb-4">${student.classe.nom}</p>
                                 <div class="d-flex justify-content-center mb-2" bis_skin_checked="1">
-                                <a href="/etudints/${student.id}"><button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-outline-primary ms-1" data-mdb-button-initialized="true">Profile</button></a>
+                                <a href="/etudiants/${student.id}"><button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-outline-primary ms-1" data-mdb-button-initialized="true">Profile</button></a>
                                 </div>
                             </div>
                         </div>
