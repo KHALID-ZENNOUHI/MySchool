@@ -45,7 +45,6 @@
                                         <th>Subjects</th>
                                         <th>Exam Name</th>   
                                         <th>Note</th>
-                                        <th>Address</th>
                                         <th class="text-end">Action</th>
                                     </tr>
                                 </thead>
@@ -66,9 +65,9 @@
                                                 <a href="#">{{$note->etudiant->nom}} {{$note->etudiant->prenom}}</a>
                                             </h2>
                                         </td>
-                                        <td>{{$note->activity->matire->nom}}</td>
-                                        <td>{{$note->activity->title}}</td>
-                                        <td></td>
+                                        <td>{{$note->activite->matiere->nom}}</td>
+                                        <td>{{$note->activite->title}}</td>
+                                        <td>{{$note->note}}</td>
                                         <td class="text-end">
                                             <div class="actions">
                                                 <a href="" class="btn btn-sm bg-danger-light">
@@ -133,7 +132,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="etudiants" class="form-label">Student Name</label>
-                        <select class="form-select" id="etudiants">
+                        <select class="form-select" id="etudiants" name="etudiant_id">
                             <option selected disabled>--Select Student--</option>
                             @foreach ($classe->etudiants as $etudiant)
                             <option value="{{$etudiant->id}}">{{$etudiant->nom}} {{$etudiant->prenom}}</option>
@@ -151,7 +150,7 @@
                     </div> --}}
                     <div class="form-group">
                         <label for="activities" class="form-label">Exam</label>
-                        <select class="form-select" id="activities">
+                        <select class="form-select" id="activities" name="activite_id">
                             <option selected disabled>--Select Exam--</option>
                             @foreach ($activities as $activity)
                             <option value="{{$activity->id}}">{{$activity->title}}</option>
@@ -160,7 +159,7 @@
                     </div>
                     <div class="form-group">
                         <label for="note" class="form-label">Note</label>
-                        <input type="text" class="form-control" id="note" placeholder="Enter Note">
+                        <input type="text" class="form-control" id="note" name="note" placeholder="Enter Note">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
